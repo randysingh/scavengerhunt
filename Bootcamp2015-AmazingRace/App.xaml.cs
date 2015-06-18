@@ -24,7 +24,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Bootcamp2015.AmazingRace
 {
-    public sealed partial class App 
+    public sealed partial class App
     {
         private WinRTContainer container;
         private SettingsService settings;
@@ -45,15 +45,12 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterWinRTServices();
             container.RegisterSharingService();
 
-            container
-                .PerRequest<MainPageViewModel>()
-            ;
+            container.PerRequest<MainPageViewModel>();
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
             container.RegisterInstance(typeof(IDataService), null, typeof(IDataService));
-
         }
 
         protected override object GetInstance(Type service, string key)

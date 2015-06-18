@@ -1,0 +1,22 @@
+﻿<ContentDialog
+    x:Class="Bootcamp2015.AmazingRace.Views.JoinTeamPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bootcamp2015.AmazingRace.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Welcome"
+    PrimaryButtonText="Join" 
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap">
+            <TextBlock.Text>
+                Complete your registration by providing your team code.
+            </TextBlock.Text>
+        </TextBlock>
+        
+        <TextBox Name="teamCode" Header="Enter Team Code" Margin="0,20,0,0"/>
+    </StackPanel>
+</ContentDialog>
