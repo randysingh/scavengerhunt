@@ -9,5 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" Margin="10,10,10,10">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Amazing Smart Client Race" FontSize="50" Margin="0,0,0,30"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Login" FontSize="30"/>
+            <Button Content="Using your Google Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button Content="Using your Facebook Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </StackPanel>
     </Grid>
 </Page>
