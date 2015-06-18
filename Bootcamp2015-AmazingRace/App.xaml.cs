@@ -1,9 +1,11 @@
-﻿using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
+﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Base.Services;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.ViewModels;
 using Bootcamp2015.AmazingRace.Views;
 using Caliburn.Micro;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +36,12 @@ namespace Bootcamp2015.AmazingRace
             this.InitializeComponent();
             settings = new SettingsService();
         }
+
+        public static MobileServiceClient MobileService = new MobileServiceClient(
+            Connections.MobileServicesUri,
+            Connections.MobileServicesAppKey
+        );
+
 
         #region Bootstrapper
 

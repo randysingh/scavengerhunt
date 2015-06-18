@@ -1,16 +1,18 @@
 ﻿using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace Bootcamp2015.AmazingRace.Base.Services
 {
     public class SettingsService : ISettingsService
     {
         // Our isolated storage settings 
-        private Windows.Storage.ApplicationDataContainer dataContainer;
+        private ApplicationDataContainer dataContainer;
 
         public event EventHandler SettingsChanged;
 
@@ -18,11 +20,10 @@ namespace Bootcamp2015.AmazingRace.Base.Services
         {
             try
             {
-                dataContainer = Windows.Storage.ApplicationData.Current.LocalSettings;
+                dataContainer = ApplicationData.Current.LocalSettings;
             }
             catch
             {
-
             }
         }
 
@@ -72,7 +73,7 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public bool SetSerializedValue<T>(string key, T value)
         {
-            var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            var str = JsonConvert.SerializeObject(value);
             return SetValue<string>(key, str);
         }
 
@@ -87,7 +88,7 @@ namespace Bootcamp2015.AmazingRace.Base.Services
             if (string.IsNullOrEmpty(retValue))
                 return value;
 
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(retValue);
+            return JsonConvert.DeserializeObject<T>(retValue);
         }
 
 

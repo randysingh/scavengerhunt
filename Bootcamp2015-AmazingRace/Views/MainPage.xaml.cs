@@ -1,18 +1,27 @@
-﻿using Windows.UI.Xaml.Navigation;
+﻿using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
+using Bootcamp2015.AmazingRace.ViewModels;
+using Microsoft.WindowsAzure.MobileServices;
+using System;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;  
 
 
 namespace Bootcamp2015.AmazingRace.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// THe main login page
     /// </summary>
-    public sealed partial class MainPage
+    public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            this.DataContext = new MainPageViewModel();
         }
 
         /// <summary>
@@ -29,6 +38,53 @@ namespace Bootcamp2015.AmazingRace.Views
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+        }
+
+        private MobileServiceUser user;
+        
+        private async Task<bool> Authenticate(MobileServiceAuthenticationProvider provider)
+        {
+            while (user == null)
+            {
+                string message;
+                try
+                {
+                    user = await App.MobileService
+                        .LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                    message =
+                        string.Format("You are now logged in - {0}", user.UserId);
+
+                    return true;
+                }
+                catch (InvalidOperationException)
+                {
+                    message = "You must log in. Login Required";
+                }
+            }
+
+            return false;
+        }
+
+        private async Task<bool> AuthenticateFacebook()
+        {
+            return await Authenticate(MobileServiceAuthenticationProvider.Facebook);
+        }
+
+        private async Task<bool> AuthenticateGoogle()
+        {
+            return await Authenticate(MobileServiceAuthenticationProvider.Google);
+        }
+
+        private async void btnGoogle_Click(object sender, RoutedEventArgs e)
+        {
+            if (await AuthenticateGoogle())
+                Frame.Navigate(typeof(JoinTeamPage));
+        }
+
+        private async void btnFacebook_Click(object sender, RoutedEventArgs e)
+        {
+            if (await AuthenticateFacebook())
+                Frame.Navigate(typeof(JoinTeamPage));
         }
     }
 }
