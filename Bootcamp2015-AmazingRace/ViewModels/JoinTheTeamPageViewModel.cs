@@ -4,6 +4,7 @@ using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using System.Threading.Tasks;
 using System.Text;
 using System.Windows.Input;
+using System.Linq;
 using Bootcamp2015.AmazingRace.Base;
 using Bootcamp2015.AmazingRace.Base.Helpers;
 
@@ -97,9 +98,10 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             //run background task
 
             await BackgroundTaskHelpers.BackgroundTaskRegister();
-            //move to Leaderboard
-            //move to Leaderboard
-            string raceId = @"test_race";
+
+            var races = await dataService.GetRaceList();
+            Race currentRace = races.FirstOrDefault();
+            string raceId = currentRace.Id;
 
             this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>(raceId);
         }

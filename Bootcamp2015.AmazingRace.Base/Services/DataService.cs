@@ -35,13 +35,13 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public Task<IEnumerable<Race>> GetRaceList()
         {
-            return this.mobileService.ServiceClient.InvokeApiAsync<IEnumerable<Race>>("/race", HttpMethod.Get,
+            return this.mobileService.ServiceClient.InvokeApiAsync<IEnumerable<Race>>("race", HttpMethod.Get,
                    new Dictionary<string, string>());
         }
 
         public Task<IEnumerable<Clue>> GetClueList(string raceId)
         {
-            return this.mobileService.ServiceClient.InvokeApiAsync<IEnumerable<Clue>>("/race/{raceId}/clues", HttpMethod.Get,
+            return this.mobileService.ServiceClient.InvokeApiAsync<IEnumerable<Clue>>("race/{raceId}/clues", HttpMethod.Get,
                    new Dictionary<string, string>() { { "raceId", raceId } });
         }
 
