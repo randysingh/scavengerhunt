@@ -49,6 +49,7 @@ namespace Bootcamp2015.AmazingRace
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
+            container.RegisterSingleton(typeof(IMobileService), null, typeof(MobileService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
             container.RegisterSingleton(typeof(IDataService), null, typeof(DataService));
 

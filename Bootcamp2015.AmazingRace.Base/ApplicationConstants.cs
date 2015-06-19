@@ -1,4 +1,4 @@
-﻿namespace Bootcamp2015.AmazingRace
+namespace Bootcamp2015.AmazingRace.Base
 {
     public static class ApplicationConstants
     {
