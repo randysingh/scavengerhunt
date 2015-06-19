@@ -25,6 +25,11 @@
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock Text="Leaderboard!" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
 
+            <StackPanel>
+                
+                
+            </StackPanel>
+            
             <!--TODO: Content should be placed within the following grid-->
             <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
                 <TextBlock FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch" Text="TEAM_CODE" VerticalAlignment="Top" Margin="-10,129,10,0"/>

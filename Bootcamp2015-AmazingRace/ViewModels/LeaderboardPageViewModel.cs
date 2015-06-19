@@ -15,6 +15,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private INavigationService _navigationService;
 
+        private IEnumerable<Team> _teams;
+        public IEnumerable<Team> Teams {
+            get { return _teams; }
+            set { value = _teams; } 
+        }
+
         public ICommand GotoClueCommand
         {
             get { return  new DelegateCommand(o => OnGotoCluePage()); }
@@ -24,6 +30,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             _navigationService = navigationService;
         }
+
+        
 
         protected async void OnGotoCluePage()
         {
