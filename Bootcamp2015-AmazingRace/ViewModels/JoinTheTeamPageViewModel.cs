@@ -93,11 +93,15 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private async void Join()
         {
             //joind the team
-            //var team = await this.dataService.PostJoinTeam(this.teamCode);
+            var team = await this.dataService.PostJoinTeam(this.teamCode);
             //run background task
+
             await BackgroundTaskHelpers.BackgroundTaskRegister();
             //move to Leaderboard
-            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
+            //move to Leaderboard
+            string raceId = @"test_race";
+
+            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>(raceId);
         }
     }
 }
