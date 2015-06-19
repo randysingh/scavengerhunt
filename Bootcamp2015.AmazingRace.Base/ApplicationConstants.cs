@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bootcamp2015.AmazingRace
+namespace Bootcamp2015.AmazingRace.Base
 {
     public static class ApplicationConstants
     {
