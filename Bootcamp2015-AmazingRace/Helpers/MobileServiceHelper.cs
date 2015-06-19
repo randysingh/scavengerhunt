@@ -115,8 +115,5 @@ namespace Bootcamp2015.AmazingRace.Helpers
         }
 
 
-
-
-         
     }
 }
