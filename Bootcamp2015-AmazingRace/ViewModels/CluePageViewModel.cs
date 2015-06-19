@@ -51,6 +51,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
+        public ICommand GotoMapCommand
+        {
+            get
+            {
+                return new DelegateCommand(o => OnGotoMapPage());
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -92,6 +100,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         protected void OnGotoCluePage()
         {
             _navigationService.NavigateToViewModel<CluePageViewModel>();
+        }
+
+        protected void OnGotoMapPage()
+        {
+            Clue fakeClue = new Clue { longitude = "47.2", latitude = "47.2" };
+            _navigationService.NavigateToViewModel<MapPageViewModel>(fakeClue);
         }
 
         #endregion
