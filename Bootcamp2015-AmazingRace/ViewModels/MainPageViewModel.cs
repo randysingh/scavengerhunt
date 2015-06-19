@@ -36,9 +36,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public async void Login()
         {
             this.mobileService.Initialize();
-            var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
-
-            
+            var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);            
             this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
         }
 
