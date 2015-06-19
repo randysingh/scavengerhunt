@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Linq;
 using Bootcamp2015.AmazingRace.Base;
 using Bootcamp2015.AmazingRace.Base.Helpers;
+using System;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
@@ -93,9 +94,16 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void Join()
         {
-            //joind the team
-            var team = await this.dataService.PostJoinTeam(this.teamCode);
-            //run background task
+            //join the team
+            try
+            {
+                var team = await this.dataService.PostJoinTeam(this.teamCode);
+            }
+            catch (Exception e)
+            {
+                TeamCode = "Invalid Code.";
+                return;
+            }
 
             await BackgroundTaskHelpers.BackgroundTaskRegister();
 
