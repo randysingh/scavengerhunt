@@ -81,7 +81,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             //run background task
             //move to Leaderboard
 
-            this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
+            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
         }
     }
 }

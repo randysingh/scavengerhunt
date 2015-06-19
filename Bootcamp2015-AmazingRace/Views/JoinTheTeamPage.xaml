@@ -29,6 +29,6 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding WelcomeMessage}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" />
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Complete your registration by providing your team code." FontSize="20" TextWrapping="WrapWholeWords" VerticalAlignment="Center" />
         <TextBox Grid.Row="5" Grid.Column="1" Text="Enter Team Code" FontSize="18" VerticalAlignment="Center" />
-        <Button Content="Join" Grid.Column="1" Grid.Row="6" />
+        <Button Content="Join" Grid.Column="1" Grid.Row="6" Command="{Binding JoinCommand}"/>
     </Grid>
 </Page>

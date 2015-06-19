@@ -29,14 +29,39 @@
             <ListView x:Name="teamListView" ItemsSource="{Binding Race.Teams}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="White" Height="50" HorizontalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Stretch" Text="{Binding Name}" FontSize="18"></TextBlock>
-                        </Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+                            <Image Width="60" Height="60" Source="ms-appx:///Assets/Square71x71Logo.png" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.RowSpan="4" />
+                            <TextBlock VerticalAlignment="Bottom" TextWrapping="WrapWholeWords" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Text="{Binding Name}" FontSize="18"></TextBlock>
+                            <TextBlock VerticalAlignment="Top" TextWrapping="WrapWholeWords" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Text="{Binding Points}" FontSize="18"></TextBlock>
+                        </Grid>
                     </DataTemplate>                     
                 </ListView.ItemTemplate>
             </ListView>
 
         </ScrollViewer>
 
+        <Grid Grid.Column="1" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Next Clue" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" />
+            <Button Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="2" />
+        </Grid>
+        
     </Grid>
 </Page>
