@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Bootcamp2015.AmazingRace.Base.Helpers
     public static class UpdateLocationHelper
     {
         private static Geolocator locator = new Geolocator() { ReportInterval = 1000 };
-        
+
 
         public async static Task UpdateLocation()
         {
@@ -29,28 +30,24 @@ namespace Bootcamp2015.AmazingRace.Base.Helpers
         {
             var pos = new Geopoint(p.Coordinate.Point.Position);
 
-            var vault = new PasswordVault();
-            PasswordCredential passCred = null;
-
-            try
-            {
-                passCred = vault.FindAllByResource(MobileServiceAuthenticationProvider.Google.ToString()).FirstOrDefault();
-            }
-            catch 
-            {
-                
-            }
-
-            passCred.RetrievePassword();
-
+            var mobileServiceUser = PasswordVaultHelper.RetriveGoogleUser();
             var mobileServiceClinet = new MobileServiceClient(ApplicationConstants.MobileServicesUri, ApplicationConstants.MobileServicesAppKey);
-            var mobileServiceUser = new MobileServiceUser(passCred.UserName);
-
-            mobileServiceUser.MobileServiceAuthenticationToken = passCred.Password;
-
             mobileServiceClinet.CurrentUser = mobileServiceUser;
 
-            var profile = await mobileServiceClinet.InvokeApiAsync<Profile>("profile", HttpMethod.Get, null);
+            //var races = await mobileServiceClinet.InvokeApiAsync<IEnumerable<Race>>("race", HttpMethod.Get, new Dictionary<string, string>());
+
+            //var race = races.FirstOrDefault();
+            //if (race != null)
+            //{
+            var a = await
+                mobileServiceClinet.InvokeApiAsync<Profile>("updatelocation", HttpMethod.Post,
+                    new Dictionary<string, string>()
+                        {
+                            { "raceId", "07FC520D-CD15-4EB7-BB21-792BA5195A5E" }, 
+                            { "latitude", pos.Position.Latitude.ToString() }, 
+                            { "longitude", pos.Position.Longitude.ToString() }
+                        });
+            //}
         }
     }
 }

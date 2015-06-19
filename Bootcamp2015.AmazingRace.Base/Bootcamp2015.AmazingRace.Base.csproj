@@ -84,6 +84,7 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="FakeIoC.cs" />
     <Compile Include="Helpers\BackgroundTaskHelpers.cs" />
+    <Compile Include="Helpers\PasswordVaultHelper.cs" />
     <Compile Include="Helpers\UpdateLocationHelper.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Race.cs" />

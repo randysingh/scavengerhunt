@@ -1,4 +1,5 @@
-﻿using Windows.ApplicationModel.Background;
+﻿using System;
+using Windows.ApplicationModel.Background;
 using Bootcamp2015.AmazingRace.Base.Helpers;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 
@@ -14,8 +15,16 @@ namespace Bootcamp2015.AmazingRace.BackgroundTask
         {
             var deferral = taskInstance.GetDeferral();
 
-            //TODO await?
-            await UpdateLocationHelper.UpdateLocation();
+            try
+            {
+
+                await UpdateLocationHelper.UpdateLocation();
+            }
+                //TODO await?
+            catch (Exception ex)
+            {
+                
+            }
 
             deferral.Complete();
         }

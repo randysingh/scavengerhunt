@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.Security.Credentials;
 using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
 using Bootcamp2015.AmazingRace.Helpers;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
@@ -38,10 +39,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public async void Login()
         {
             this.mobileService.Initialize();
-            var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
-            var passwordCredetials = new PasswordCredential(MobileServiceAuthenticationProvider.Google.ToString(), result.UserId, result.MobileServiceAuthenticationToken);
-            var vault = new PasswordVault();
-            vault.Add(passwordCredetials);
+
+            //var passwordCredentials = PasswordVaultHelper.RetriveGooglePasswordCredential();
+            //if (passwordCredentials == null)
+            //{
+                var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
+                PasswordVaultHelper.PutGooglePasswordToPasswordVault(result);
+            //}
+
             this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
         }
 
