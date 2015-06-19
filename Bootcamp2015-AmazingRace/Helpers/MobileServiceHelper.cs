@@ -75,7 +75,10 @@ namespace Bootcamp2015.AmazingRace.Helpers
             Profile profile = await GetProfile();
             string teamId = profile.teams.First().id;
 
-            string call = string.Format("race/{0}/team/{1}", "test_race", teamId );
+            Race firstRace = await GetFirstRace();
+            string raceId = firstRace.id;
+
+            string call = string.Format("race/{0}/team/{1}", raceId, teamId );
             Dictionary<string, string> paramDict = new Dictionary<string, string>();
             paramDict.Add("skip", _skipCounter.ToString());
             var status = await _mobileServiceClient.InvokeApiAsync<RaceStatus>(call, HttpMethod.Get, paramDict);
