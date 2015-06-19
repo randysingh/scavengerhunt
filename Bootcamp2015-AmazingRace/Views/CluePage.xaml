@@ -9,8 +9,17 @@
     Background="White">
     
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <TextBlock Foreground="Black" Text="Clues" FontSize="36" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button Foreground="Black" FontSize="18" Content="Logout" Click="LogoutClick" Margin="291,-10,0,592" Height="52"/>
-        <Button Background="Green" Foreground="Black" FontSize="18" Content="View" Click="ViewClick" Margin="50, 50, 50, 50" Height="52"/>
+        <StackPanel>
+            <Button Foreground="Black" FontSize="18" Content="Logout" Click="LogoutClick" Height="52"/>
+            <Button Background="Green" Foreground="Black" FontSize="18" Content="View" Click="ViewClick" HorizontalAlignment="Center" Height="52"/>
+            <Button Background="Green" Foreground="Black" FontSize="18" Content="Upload Photo" Click="PhotoClick" HorizontalAlignment="Center" Height="52"/>
+            <Button Background="Green" Foreground="Black" FontSize="18" Content="Skip" Click="SkipClick" HorizontalAlignment="Center" Height="52"/>
+        </StackPanel>
     </Grid>
 </Page>
