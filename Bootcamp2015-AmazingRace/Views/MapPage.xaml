@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="Bootcamp2015.AmazingRace.Views.MapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bootcamp2015.AmazingRace.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:converters="using:Bootcamp2015.AmazingRace.Converters"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="bool2vis"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <maps:MapControl 
+            x:Name="_map"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            MapServiceToken="q53_aaK2eEb2M-qo08mFpQ"
+            ZoomLevel="15">
+            <maps:MapItemsControl ItemsSource="{Binding Pins}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="#77777777">
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe UI Symbol" VerticalAlignment="Bottom" Text="&#xE139;" maps:MapControl.Location="{Binding Location}" maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" Foreground="{Binding Color}" FontSize="20" Margin="5"/>
+                                <TextBlock Text="{Binding Text}" VerticalAlignment="Bottom" Foreground="{Binding Color}" FontSize="20" Margin="5"/>
+                            </StackPanel>
+                            <HyperlinkButton Content="Directions" FontSize="20" FontWeight="Black" Click="OnDirectionsClick" Visibility="{Binding CanGetDirections, Converter={StaticResource bool2vis}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+        </maps:MapControl>
+        <Border Width="1" Background="#77777777" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+        <Border Height="1" Background="#77777777" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Background="#77777777">
+            <Button Content="Locate" Click="OnRefreshClick" Margin="5,0"/>
+            <Button Content="Add" Click="OnAddPinClick" Margin="5,0"/>
+            <Button Content="Geofence" Click="OnGeofenceClick" Margin="5,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

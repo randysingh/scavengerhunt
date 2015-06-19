@@ -44,5 +44,10 @@ namespace Bootcamp2015.AmazingRace.Views
         {
             Frame.Navigate(typeof(MainPage));
         }
+
+        private void ViewClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapPage));
+        }
     }
 }

@@ -11,5 +11,6 @@
     <Grid>
         <TextBlock Foreground="Black" Text="Clues" FontSize="36" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button Foreground="Black" FontSize="18" Content="Logout" Click="LogoutClick" Margin="291,-10,0,592" Height="52"/>
+        <Button Background="Green" Foreground="Black" FontSize="18" Content="View" Click="ViewClick" Margin="50, 50, 50, 50" Height="52"/>
     </Grid>
 </Page>
