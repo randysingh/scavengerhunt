@@ -15,7 +15,7 @@
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" Margin="10,10,10,10">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Clue" FontSize="30" Margin="0,0,0,30"/>
 
-            <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap" Text="{Binding ClueText, Mode=TwoWay}" />
+            <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap" Text="{Binding ClueText, Mode=TwoWay}" Margin="0,0,0,20" />
 
             <Button FontFamily="Segoe UI Symbol" Content="View map &#xE139;" Command="{Binding ViewMap}"/>
             <Button FontFamily="Segoe UI Symbol" Content="Upload photo &#xE114;" Command="{Binding UploadPhoto}"/>
