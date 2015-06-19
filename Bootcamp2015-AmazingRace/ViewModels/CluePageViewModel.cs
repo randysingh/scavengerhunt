@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Models;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Views;
@@ -24,6 +25,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public ICommand UploadPhoto { get; set; }
         public ICommand Skip { get; set; }
 
+        public string ClueText { get; set; }
+
         public CluePageViewModel(INavigationService navigationService,
             IDataService dataService, ISettingsService settingsService)
         {
@@ -33,7 +36,11 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
             ViewMap = new DelegateCommand(() => ShowMap());
             UploadPhoto = new DelegateCommand(() => OnFilePick());
-            Skip = new DelegateCommand(() => GetNextClue());
+            Skip = new DelegateCommand(() => GetNextClueAsync());
+
+            _settingsService.SetValue<int>("INDEX", 0);
+            InitRaceAsync();
+            GetNextClueAsync();
         }
 
         private void OnFilePick()
@@ -61,9 +68,37 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             _navigationService.Navigate(typeof(MapPage));
         }
 
-        private void GetNextClue()
+        private async void InitRaceAsync()
         {
-            // Change content
+            // Get & save the current race
+            IEnumerable<Race> races = await _dataService.GetRacesAsync();
+            Race thisRace = races.First<Race>();
+            _settingsService.SetSerializedValue<Race>("RACE", thisRace);
+        }
+
+        /// <summary>
+        /// Gets the next clue and displays its description to the user
+        /// </summary>
+        private async void GetNextClueAsync()
+        {
+            // Get the race and team for their IDs, and the skip index
+            Race thisRace = _settingsService.GetDeserializedValueOrDefault<Race>("RACE");
+            Team thisTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+            int index = _settingsService.GetValueOrDefault<int>("INDEX");
+
+            // Update the team with the "NextClueId" field from the api call
+            thisTeam = await _dataService.GetTeamAsync(thisRace.Id, thisTeam.Id, index);
+
+            // Get the clue with "NextClueId" from the team
+            Clue thisClue = await _dataService.GetClueAsync(thisTeam.NextClueId);
+
+            // Update the clue and skip index
+            _settingsService.SetSerializedValue<Clue>("CLUE", thisClue);
+            _settingsService.SetValue<int>("INDEX", index + 1);
+
+            // Update the view
+            ClueText = thisClue.Description;
+            NotifyOfPropertyChange(() => ClueText);
         }
     }
 }

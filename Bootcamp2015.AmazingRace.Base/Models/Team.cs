@@ -26,5 +26,8 @@ namespace Bootcamp2015.AmazingRace.Base.Models
 
         [JsonProperty(PropertyName = "longitude")]
         public double Longitude { get; set; }
+
+        [JsonProperty(PropertyName = "nextClueId")]
+        public string NextClueId { get; set; }
     }
 }
