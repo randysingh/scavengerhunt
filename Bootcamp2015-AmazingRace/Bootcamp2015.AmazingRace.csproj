@@ -88,6 +88,7 @@
     <Compile Include="Helpers\ContinuationManager.cs" />
     <Compile Include="ViewModels\LeaderboardPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\MapPageViewModel.cs" />
     <Compile Include="Views\CluePage.xaml.cs">
       <DependentUpon>CluePage.xaml</DependentUpon>
     </Compile>
@@ -98,6 +99,9 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PermissionsPage.xaml.cs">
       <DependentUpon>PermissionsPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -201,7 +209,7 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
+    <ProjectReference Include="..\..\..\Downloads\scavengerhunt-master\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
       <Project>{58ba43c5-0dc9-4af1-9ee6-4b8f7453c560}</Project>
       <Name>Bootcamp2015.AmazingRace.Base</Name>
     </ProjectReference>
