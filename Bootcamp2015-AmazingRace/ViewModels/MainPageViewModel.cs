@@ -29,7 +29,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         public void GoToPage()
         {
-            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
+            this.navigationService.NavigateToViewModel<RegistrationPageViewModel>();
         }
 
     }
