@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Common;
+using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Models;
 using Caliburn.Micro;
 using System;
@@ -21,11 +22,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         public LeaderboardPageViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService
+            _navigationService = navigationService;
         }
 
-        protected void OnGotoCluePage()
+        protected async void OnGotoCluePage()
         {
+
             Clue fakeClue = new Clue { Description = "dfsd" };
             // Pass in the clue to the view
             _navigationService.NavigateToViewModel<CluePageViewModel>(fakeClue);
