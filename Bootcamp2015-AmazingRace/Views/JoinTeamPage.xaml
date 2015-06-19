@@ -29,7 +29,7 @@
 
         <!--TODO: Content should be placed within the following grid-->
         <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-            <TextBox TextWrapping="Wrap" HorizontalAlignment="Stretch" Text="Enter Team Code" VerticalAlignment="Top" Margin="-10,129,10,0"/>
+            <TextBox TextWrapping="Wrap" HorizontalAlignment="Stretch" Text="{Binding TeamCode, Mode=TwoWay}" VerticalAlignment="Top" Margin="-10,129,10,0"/>
             <Button Content="Join" Command="{Binding GotoLeaderboardCommand}" HorizontalAlignment="Left" Margin="-10,201,0,0" VerticalAlignment="Top"/>
 
         </Grid>

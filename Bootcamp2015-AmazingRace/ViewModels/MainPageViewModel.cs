@@ -16,7 +16,6 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     public class MainPageViewModel : Screen, IWebAuthenticationContinuable
     {
         private INavigationService _navigationService;
-        private MobileServiceClient _mobileServiceClient;
 
         public ICommand GotoJoinTeamCommand
         {
@@ -27,26 +26,23 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            MobileServiceHelper.GetInstance();
             
-            _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
 
         }
 
         protected void OnGotoJoinTeamPage()
         {
-            Login();
+            MobileServiceHelper.Login();
         }
 
-        private async void Login()
-        {
-            var result = await _mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
-        }
+
 
         public void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
         {
             if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
             {
-                _mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+                MobileServiceHelper.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
                 _navigationService.NavigateToViewModel<JoinTeamPageViewModel>();
             }
 
