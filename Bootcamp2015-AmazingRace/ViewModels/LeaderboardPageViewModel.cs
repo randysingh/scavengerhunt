@@ -15,8 +15,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 {
     public class LeaderboardPageViewModel : Screen
     {
-        private INavigationService _navigationService;
-        private IDataService _dataService;
+        private readonly INavigationService _navigationService;
+        private readonly IDataService _dataService;
 
         private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
 

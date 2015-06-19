@@ -91,7 +91,6 @@ namespace Bootcamp2015.AmazingRace.Base.Services
             return JsonConvert.DeserializeObject<T>(retValue);
         }
 
-
         public void ClearValue(string key)
         {
             if (dataContainer.Values.ContainsKey(key))

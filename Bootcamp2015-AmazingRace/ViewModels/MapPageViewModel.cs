@@ -16,5 +16,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             _locator = new Geolocator() { ReportInterval = 1000 };
         }
+
+        public string MapToken { get { return ApplicationConstants.MapToken; } }
     }
 }

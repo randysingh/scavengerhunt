@@ -26,11 +26,6 @@ namespace Bootcamp2015.AmazingRace
             settings = new SettingsService();
         }
 
-        public static MobileServiceClient MobileService = new MobileServiceClient(
-            Connections.MobileServicesUri,
-            Connections.MobileServicesAppKey
-        );
-
         #region Bootstrapper
 
         #region IOC

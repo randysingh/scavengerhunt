@@ -1,8 +1,10 @@
 ﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Views;
 using Caliburn.Micro;
 using Microsoft.WindowsAzure.MobileServices;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 {
     public class MainPageViewModel : Screen, IWebAuthenticationContinuable
     {
+        private const string PROVIDER_GOOGLE = "Google";
+        private const string PROVIDER_FACEBOOK = "Facenook";
+
         private readonly INavigationService _navigationService;
+        private readonly IDataService _dataService;
+        private readonly ISettingsService _settingsService;
+
+        private string provider;
         private MobileServiceUser user;
 
         #region Bindable properties
@@ -25,32 +34,56 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         #endregion
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService,
+            IDataService dataService, ISettingsService settingsService)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
+            _settingsService = settingsService;
 
             GoogleLogin = new DelegateCommand(() => DoGoogleLogin());
             FacebookLogin = new DelegateCommand(() => DoFacebookLogin());
+
+            if (_dataService.MobileServiceClient == null)
+            {
+                _dataService.MobileServiceClient = new MobileServiceClient(
+                    Connections.MobileServicesUri,
+                    Connections.MobileServicesAppKey
+                );
+            }
         }
 
         #region Identity Provider authentication
 
-        private async Task<bool> Authenticate(MobileServiceAuthenticationProvider provider)
+        private async Task<bool> Authenticate(MobileServiceAuthenticationProvider providerType)
         {
             while (user == null)
             {
-                try
+                if (_settingsService.HaveValue(provider))
                 {
-                    user = await App.MobileService.LoginAsync(provider);
+                    user = _settingsService.GetDeserializedValueOrDefault<MobileServiceUser>(provider);
+                }
 
-                    //user.UserId;
-                    //user.MobileServiceAuthenticationToken;
+                if (user != null)
+                {
+                    _dataService.MobileServiceClient.CurrentUser = user;
 
                     return true;
                 }
-                catch (InvalidOperationException)
+                else
                 {
-                    return false;
+                    try
+                    {
+                        user = await _dataService.MobileServiceClient.LoginAsync(providerType);
+
+                        _settingsService.SetSerializedValue<MobileServiceUser>(provider, user);
+
+                        return true;
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -73,25 +106,27 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void DoGoogleLogin()
         {
-            //if (await AuthenticateGoogle())
-            //    _navigationService.NavigateToViewModel<JoinTeamPageViewModel>();
+            provider = PROVIDER_GOOGLE;
 
-            _navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
+            if (await AuthenticateGoogle())
+                _navigationService.NavigateToViewModel<JoinTeamPageViewModel>();
         }
 
         private async void DoFacebookLogin()
         {
+            provider = PROVIDER_FACEBOOK;
+
             if (await AuthenticateFacebook())
                 _navigationService.NavigateToViewModel<JoinTeamPageViewModel>();
         }
 
         #endregion
 
-        public void ContinueWebAuthentication(Windows.ApplicationModel.Activation.WebAuthenticationBrokerContinuationEventArgs args)
+        public void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
         {
             if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
             {
-                App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+                _dataService.MobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
         }
     }

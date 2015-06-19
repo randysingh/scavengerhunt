@@ -16,8 +16,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 {
     public class CluePageViewModel : Screen, IFileOpenPickerContinuable
     {
-        private INavigationService _navigationService;
-        private IDataService _dataService;
+        private readonly INavigationService _navigationService;
+        private readonly IDataService _dataService;
 
         public ICommand ViewMap { get; set; }
         public ICommand UploadPhoto { get; set; }

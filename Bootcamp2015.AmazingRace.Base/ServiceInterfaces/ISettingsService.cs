@@ -26,8 +26,6 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
 
         bool HaveValue(string key);
 
-
-
         void NotifySettingsChanged();
     }
 }

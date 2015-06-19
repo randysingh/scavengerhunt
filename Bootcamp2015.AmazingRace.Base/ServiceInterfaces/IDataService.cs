@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Base.Models;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,28 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
 {
     public interface IDataService
     {
-        Task<Profile> GetProfileAsync();
-
-        Task<Team> JoinTeamAsync(string teamCode);
+        IMobileServiceClient MobileServiceClient;
 
         Task<IEnumerable<Race>> GetRacesAsync();
+
+        Task<Race> GetRaceAsync(string raceId);
 
         Task<Clue> GetClueAsync(string raceId, string teamId);
 
         Task<Clue> GetClueAsync(string raceId, string teamId, int index);
 
-        void PostClueResponse(Clue clue, byte[] imageBytes);
+        Task<IEnumerable<Clue>> GetCluesAsync(string raceId);
+
+        Task<IEnumerable<Team>> GetTeamAsync(string raceId);
+
+        void UpdateLocationAsync(string raceId, string latitude, string longitude);
+
+        Task<Clue> GetClueAsync(string clueId);
+
+        void SubmitClueResponseAsync(string clueId, byte[] imageBytes, string latitude, string longitude);
+
+        Task<Profile> GetProfileAsync();
+
+        void JoinTeamAsync(string teamCode);
     }
 }
