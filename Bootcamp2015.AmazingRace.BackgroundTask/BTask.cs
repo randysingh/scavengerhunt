@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bootcamp2015.AmazingRace.Base.Helpers;
 using Windows.ApplicationModel.Background;
 
 namespace Bootcamp2015.AmazingRace.BackgroundTask
@@ -11,11 +7,11 @@ namespace Bootcamp2015.AmazingRace.BackgroundTask
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            //var deferral = taskInstance.GetDeferral();
+            var deferral = taskInstance.GetDeferral();
 
+            LocationHelper.Start();
 
-
-            //deferral.Complete();
+            deferral.Complete();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 
-namespace Bootcamp2015.AmazingRace.Base
+namespace Bootcamp2015.AmazingRace.Base.Helpers
 {
     public class BackgroundTaskHelpers
     {

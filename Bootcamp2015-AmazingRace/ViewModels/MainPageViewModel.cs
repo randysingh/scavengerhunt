@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
+using Windows.Security.Credentials;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
@@ -71,6 +72,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
                     try
                     {
                         user = await _serviceClient.LoginAsync(providerType);
+
+                        // Store in password vault for background task
+                        PasswordVault vault = new PasswordVault();
+                        PasswordCredential credential = new PasswordCredential(
+                            providerType.ToString(), user.UserId, user.MobileServiceAuthenticationToken);
+                        vault.Add(credential);
 
                         _settingsService.SetSerializedValue<MobileServiceUser>(provider, user);
 

@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using Bootcamp2015.AmazingRace.Base.Helpers;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,53 +19,22 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         public ObservableCollection<PinViewModel> Pins { get; set; }
 
-        private Geolocator _locator;
-
         public MapPageViewModel()
         {
             Pins = new ObservableCollection<PinViewModel>();
 
-            // Locator
-            if (_locator == null)
-            {
-                _locator = new Geolocator() { ReportInterval = 1000 };
-            }
-
-            if (_locator != null)
-            {
-                _locator.PositionChanged += OnLocatorPositionChanged;
-                Refresh();
-            }
+            UpdateMyLocation(CurrentPosition);
         }
 
         public string MapToken { get { return ApplicationConstants.MapToken; } }
 
-        private Geopoint _currentPos;
         public Geopoint CurrentPosition
         {
-            get { return _currentPos; }
-            set { _currentPos = value; }
+            get { return LocationHelper.CurrentPosition; }
         }
 
-        private async void OnLocatorPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        private void UpdateMyLocation(Geopoint pos)
         {
-            //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //{
-            //    UpdateMyLocation(args.Position);
-            //});
-        }
-
-        private async Task Refresh()
-        {
-            var pos = await _locator.GetGeopositionAsync();
-            UpdateMyLocation(pos);
-        }
-
-        private void UpdateMyLocation(Geoposition p)
-        {
-            var pos = new Geopoint(p.Coordinate.Point.Position);
-            CurrentPosition = pos;
-
             var pin = new PinViewModel
             {
                 Text = "Current location",
@@ -76,6 +46,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             {
                 Pins.RemoveAt(0);
             }
+
             Pins.Insert(0, pin);
         }
     }

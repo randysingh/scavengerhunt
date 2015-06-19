@@ -79,7 +79,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BackgroundTaskHelpers.cs" />
+    <Compile Include="Helpers\BackgroundTaskHelpers.cs" />
+    <Compile Include="Helpers\LocationHelper.cs" />
     <Compile Include="Models\Clue.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Race.cs" />
