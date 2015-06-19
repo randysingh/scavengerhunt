@@ -91,6 +91,8 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Helpers\ContinuationManager.cs" />
     <Compile Include="Helpers\MobileServiceHelper.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\RaceStatus.cs" />
     <Compile Include="Models\Race.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Clue.cs" />

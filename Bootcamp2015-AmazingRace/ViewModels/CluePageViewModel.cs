@@ -83,7 +83,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         // Called after user selects a file
         public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {           
-            Clue newClue = new Clue() { Description = args.Files.First<StorageFile>().Name };
+            Clue newClue = new Clue() { description = args.Files.First<StorageFile>().Name };
             Clue = newClue;
         }
 

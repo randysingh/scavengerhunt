@@ -28,9 +28,9 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         protected async void OnGotoCluePage()
         {
 
-            Clue fakeClue = new Clue { Description = "dfsd" };
+            Clue _clue = await MobileServiceHelper.GetNextClue();
             // Pass in the clue to the view
-            _navigationService.NavigateToViewModel<CluePageViewModel>(fakeClue);
+            _navigationService.NavigateToViewModel<CluePageViewModel>(_clue);
 
             //TODO: Get real clue
         }
