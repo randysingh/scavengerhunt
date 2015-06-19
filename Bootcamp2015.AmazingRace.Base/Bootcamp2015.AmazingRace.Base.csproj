@@ -79,6 +79,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Connections.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\IMessageDialogService.cs" />
     <Compile Include="ServiceInterfaces\ISettingsService.cs" />
