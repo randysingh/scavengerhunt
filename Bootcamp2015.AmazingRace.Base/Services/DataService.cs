@@ -30,26 +30,26 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public Task<IEnumerable<Race>> GetRacesAsync()
         {
-            return _serviceClient.InvokeApiAsync<IEnumerable<Race>>("api/race", HttpMethod.Get, null);
+            return _serviceClient.InvokeApiAsync<IEnumerable<Race>>("race", HttpMethod.Get, null);
         }
 
         public Task<Race> GetRaceAsync(string raceId)
         {
             return _serviceClient.InvokeApiAsync<Race>(
-                String.Format("api/race/{0}", raceId), HttpMethod.Get, null);
+                String.Format("race/{0}", raceId), HttpMethod.Get, null);
         }
 
         public Task<Team> GetTeamAsync(string raceId, string teamId, int index)
         {
             return _serviceClient.InvokeApiAsync<Team>(
-                String.Format("api/race/{0}/team/{1}?skip={2}", raceId, teamId, index),
+                String.Format("race/{0}/team/{1}?skip={2}", raceId, teamId, index),
                 HttpMethod.Get, null);
         }
 
         public Task<IEnumerable<Clue>> GetCluesAsync(string raceId)
         {
             return _serviceClient.InvokeApiAsync<IEnumerable<Clue>>(
-                String.Format("api/race/{0}/clues", raceId), HttpMethod.Get, null);
+                String.Format("race/{0}/clues", raceId), HttpMethod.Get, null);
         }
 
         #endregion
@@ -58,12 +58,12 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public Task<IEnumerable<Team>> GetTeamAsync(string raceId)
         {
-            return _serviceClient.InvokeApiAsync<IEnumerable<Team>>("api/teams", HttpMethod.Get, null);
+            return _serviceClient.InvokeApiAsync<IEnumerable<Team>>("teams", HttpMethod.Get, null);
         }
 
         public void UpdateLocationAsync(string raceId, string latitude, string longitude)
         {
-            _serviceClient.InvokeApiAsync("api/updatelocation", HttpMethod.Post,
+            _serviceClient.InvokeApiAsync("updatelocation", HttpMethod.Post,
                 new Dictionary<string, string>() { 
                     { "raceId", raceId },
                     { "latitude", latitude },
@@ -78,12 +78,12 @@ namespace Bootcamp2015.AmazingRace.Base.Services
         public Task<Clue> GetClueAsync(string clueId)
         {
             return _serviceClient.InvokeApiAsync<Clue>(
-                String.Format("api/clue/{0}", clueId), HttpMethod.Get, null);
+                String.Format("clue/{0}", clueId), HttpMethod.Get, null);
         }
 
         public void SubmitClueResponseAsync(string clueId, byte[] imageBytes, string latitude, string longitude)
         {
-            _serviceClient.InvokeApiAsync("api/clue", HttpMethod.Post,
+            _serviceClient.InvokeApiAsync("clue", HttpMethod.Post,
                 new Dictionary<string, string>() { 
                     { "clueId", clueId },
                     { "data", imageBytes.ToString() },
@@ -98,13 +98,13 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public Task<Profile> GetProfileAsync()
         {
-            return _serviceClient.InvokeApiAsync<Profile>("api/profile", HttpMethod.Get, null);
+            return _serviceClient.InvokeApiAsync<Profile>("profile", HttpMethod.Get, null);
         }
 
         public Task<Team> JoinTeamAsync(string teamCode)
         {
             return _serviceClient.InvokeApiAsync<Team>(
-                String.Format("api/profile?joinCode={0}", teamCode), HttpMethod.Post, null);
+                String.Format("profile?joinCode={0}", teamCode), HttpMethod.Post, null);
         }
 
         #endregion

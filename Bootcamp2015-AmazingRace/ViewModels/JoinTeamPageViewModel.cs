@@ -2,6 +2,7 @@
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Views;
 using Caliburn.Micro;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,15 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void JoinTeamAction()
         {
-            await _dataService.JoinTeamAsync(TeamCode);
+            string message;
+            try
+            {
+                var result = await _dataService.JoinTeamAsync(TeamCode);
+            }
+            catch (MobileServiceInvalidOperationException ex)
+            {
+                message = ex.Message;
+            }
 
             _navigationService.Navigate(typeof(LeaderboardPage));
         }
