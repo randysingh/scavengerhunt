@@ -14,7 +14,7 @@ using Windows.ApplicationModel.Resources;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
-    public class JoinTeamPageViewModel : Screen
+    public class JoinTeamPageViewModel : Screen, INotifyPropertyChangedEx
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
@@ -27,6 +27,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             set
             {
                 _nameGreeting = value == null ? "Welcome!" : String.Format("Welcome {0}!", value);
+                NotifyOfPropertyChange(() => NameGreeting);
             }
         }
 
@@ -57,10 +58,17 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void JoinTeamAction()
         {
-            Team team = await _dataService.JoinTeamAsync(TeamCode);
-            _settingsService.SetSerializedValue<Team>("TEAM", team);
+            try
+            {
+                Team team = await _dataService.JoinTeamAsync(TeamCode);
+                _settingsService.SetSerializedValue<Team>("TEAM", team);
 
-            _navigationService.Navigate(typeof(LeaderboardPage));
+                _navigationService.Navigate(typeof(LeaderboardPage));
+            }
+            catch (MobileServiceInvalidOperationException e)
+            {
+                String message = e.ToString();
+            }
         }
     }
 }

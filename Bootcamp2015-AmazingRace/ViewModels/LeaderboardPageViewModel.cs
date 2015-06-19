@@ -51,7 +51,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             CurrentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
 
             // Get race info (leaderboards)
-            GetLeaderboards();
+            //GetLeaderboards();
         }
 
         private async void GetLeaderboards()
