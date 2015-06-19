@@ -84,9 +84,7 @@
     </Compile>
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="DelegateCommand.cs" />
     <Compile Include="Helpers\ContinuationManager.cs" />
-    <Compile Include="INavigationService.cs" />
     <Compile Include="ViewModels\CluePageViewModel.cs" />
     <Compile Include="ViewModels\JoinTeamPageViewModel.cs" />
     <Compile Include="ViewModels\LeaderboardPageViewModel.cs" />
@@ -133,6 +131,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Resources\DataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CluePage.xaml">
       <SubType>Designer</SubType>

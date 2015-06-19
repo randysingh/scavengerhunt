@@ -36,6 +36,7 @@ namespace Bootcamp2015.AmazingRace.Base
                 CanExecuteChanged(this, EventArgs.Empty);
         }
     }
+
     public class DelegateCommand<T> : System.Windows.Input.ICommand where T : class
     {
         private readonly Action<T> _execute;

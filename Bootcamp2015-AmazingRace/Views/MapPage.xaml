@@ -6,6 +6,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     x:Class="Bootcamp2015.AmazingRace.Views.MapPage"
+    xmlns:viewModels="using:Bootcamp2015.AmazingRace.ViewModels"
+    xmlns:micro="using:Caliburn.Micro"
+    micro:Bind.AtDesignTime="True"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

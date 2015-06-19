@@ -42,13 +42,15 @@ namespace Bootcamp2015.AmazingRace
             Connections.MobileServicesAppKey
         );
 
-
         #region Bootstrapper
 
         #region IOC
 
         protected override void Configure()
         {
+            ViewModelLocator.AddNamespaceMapping("Bootcamp2015.AmazingRace.Views", "Bootcamp2015.AmazingRace.ViewModels");
+            ViewLocator.AddNamespaceMapping("Bootcamp2015.AmazingRace.ViewModels", "Bootcamp2015.AmazingRace.Views");
+
             container = new WinRTContainer();
             container.RegisterWinRTServices();
             container.RegisterSharingService();
@@ -56,11 +58,10 @@ namespace Bootcamp2015.AmazingRace
             container.PerRequest<MainPageViewModel>();
             container.PerRequest<JoinTeamPageViewModel>();
 
-            container.RegisterSingleton(typeof(INavigationService), null, typeof(WindowsNavigationService));
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
-            container.RegisterInstance(typeof(IDataService), null, typeof(IDataService));
+            container.RegisterInstance(typeof(IDataService), null, typeof(DataService));
         }
 
         protected override object GetInstance(Type service, string key)

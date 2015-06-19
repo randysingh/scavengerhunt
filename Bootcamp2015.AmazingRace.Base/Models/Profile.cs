@@ -9,7 +9,7 @@ namespace Bootcamp2015.AmazingRace.Base.Models
 {
     public class Profile
     {
-        [JsonProperty("id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Bootcamp2015.AmazingRace.Views;
+﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Helpers;
+using Bootcamp2015.AmazingRace.Views;
 using Caliburn.Micro;
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -7,33 +9,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Activation;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
-    public class MainPageViewModel : Screen
+    public class MainPageViewModel : Screen, IWebAuthenticationContinuable
     {
         private readonly INavigationService _navigationService;
+        private MobileServiceUser user;
 
-        private ICommand GoogleLogin { get; set; }
-        private ICommand FacebookLogin { get; set; }
+        #region Bindable properties
+
+        public ICommand GoogleLogin { get; set; }
+        public ICommand FacebookLogin { get; set; }
+
+        #endregion
 
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
 
-            GoogleLogin = new DelegateCommand(o => DoGoogleLogin());
-            FacebookLogin = new DelegateCommand(o => DoFacebookLogin());
+            GoogleLogin = new DelegateCommand(() => DoGoogleLogin());
+            FacebookLogin = new DelegateCommand(() => DoFacebookLogin());
         }
 
-        protected void GoToJoinTeamPage()
-        {
-            _navigationService.Navigate(typeof(JoinTeamPageViewModel));
-        }
-
-
-        #region Identity Provider Authentication
-
-        private MobileServiceUser user;
+        #region Identity Provider authentication
 
         private async Task<bool> Authenticate(MobileServiceAuthenticationProvider provider)
         {
@@ -41,8 +41,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             {
                 try
                 {
-                    user = await App.MobileService
-                        .LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                    user = await App.MobileService.LoginAsync(provider);
 
                     //user.UserId;
                     //user.MobileServiceAuthenticationToken;
@@ -70,6 +69,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         #endregion
 
+        #region Methods for handling button actions
+
         private async void DoGoogleLogin()
         {
             if (await AuthenticateGoogle())
@@ -80,6 +81,16 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             if (await AuthenticateFacebook())
                 _navigationService.Navigate(typeof(JoinTeamPage));
+        }
+
+        #endregion
+
+        public void ContinueWebAuthentication(Windows.ApplicationModel.Activation.WebAuthenticationBrokerContinuationEventArgs args)
+        {
+            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
+            {
+                App.MobileService.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+            }
         }
     }
 }

@@ -14,22 +14,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace Bootcamp2015.AmazingRace.Views
 {
-    public sealed partial class JoinTeamPage : ContentDialog
+    public sealed partial class JoinTeamPage : Page
     {
         public JoinTeamPage()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
     }

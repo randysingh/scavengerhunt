@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Navigation;
 namespace Bootcamp2015.AmazingRace.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// The main login page
     /// </summary>
     public sealed partial class MainPage : Page
     {
