@@ -3,22 +3,24 @@ using Bootcamp2015.AmazingRace.Base.Models;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using System.Threading.Tasks;
 using System.Text;
+using System.Windows.Input;
+using Bootcamp2015.AmazingRace.Base;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
     public class JoinTheTeamPageViewModel : Screen
     {
-        private Profile _currentUser;
-
-        private IDataService dataService;
+        private Profile currentUser;
+        private readonly IDataService dataService;
+        private readonly INavigationService navigationService;
 
         public Profile CurrentUser
         {
-            get { return _currentUser; }
+            get { return this.currentUser; }
             set
             {
-                _currentUser = value;
-                NotifyOfPropertyChange<Profile>(() => CurrentUser);
+                this.currentUser = value;
+                this.NotifyOfPropertyChange<Profile>(() => this.CurrentUser);
             }
         }
 
@@ -29,7 +31,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
                 sb.Append(@"Welcome, ");
                 if(this.CurrentUser != null)
                 {
-                    sb.Append(CurrentUser.DisplayName ?? "Bryan");
+                    sb.Append(this.CurrentUser.DisplayName ?? "Bryan");
                 }
                 else
                 {
@@ -40,16 +42,27 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public JoinTheTeamPageViewModel(IDataService dataService)
+        private ICommand joinCommand;
+
+        public ICommand JoinCommand
+        {
+            get
+            {
+                return new DelegateCommand(() => this.Join());
+            }
+        }
+
+        public JoinTheTeamPageViewModel(IDataService dataService, INavigationService navigationService)
         {
             this.dataService = dataService;
+            this.navigationService = navigationService;
         }
 
         protected async override void OnInitialize()
         {
             base.OnInitialize();
 
-            CurrentUser = await dataService.GetProfile();
+            this.CurrentUser = await this.dataService.GetProfile();
         }
 
         protected override void OnActivate()
@@ -60,6 +73,15 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         protected override void OnDeactivate(bool close)
         {
             base.OnDeactivate(close);
-        }      
+        }
+
+        private void Join()
+        {
+            //joind the team
+            //run background task
+            //move to Leaderboard
+
+            this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
+        }
     }
 }
