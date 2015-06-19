@@ -4,7 +4,7 @@
     xmlns:local="using:Bootcamp2015.AmazingRace.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     x:Class="Bootcamp2015.AmazingRace.Views.MapPage"
     xmlns:viewModels="using:Bootcamp2015.AmazingRace.ViewModels"
     xmlns:micro="using:Caliburn.Micro"
@@ -13,6 +13,34 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Maps:MapControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <maps:MapControl 
+            x:Name="_map"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            MapServiceToken="q53_aaK2eEb2M-qo08mFpQ"
+            ZoomLevel="15">
+            <maps:MapItemsControl ItemsSource="{Binding Pins}">
+                <maps:MapItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="#77777777">
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe UI Symbol" VerticalAlignment="Bottom" Text="&#xE139;" maps:MapControl.Location="{Binding Location}" maps:MapControl.NormalizedAnchorPoint="{Binding Anchor}" Foreground="{Binding Color}" FontSize="20" Margin="5"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </maps:MapItemsControl.ItemTemplate>
+            </maps:MapItemsControl>
+        </maps:MapControl>
+        <Border Width="1" Background="#77777777" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+        <Border Height="1" Background="#77777777" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Background="#77777777">
+            <Button Content="Locate" Click="OnRefreshClick" Margin="5,0" HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Page>
