@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
-    public class LeaderboardPageViewModel : Screen
+    public class LeaderboardPageViewModel : Screen, INotifyPropertyChangedEx
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
@@ -22,6 +22,11 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private ObservableCollection<Team> _leaderboard = new ObservableCollection<Team>();
         public ObservableCollection<Team> Leaderboard {
             get { return _leaderboard; }
+            set
+            {
+                _leaderboard = value;
+                NotifyOfPropertyChange(() => Leaderboard);
+            }
         }
 
         // For Caliburn's passing in object
@@ -64,13 +69,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private async void GetLeaderboards()
         {
             Race race = await _dataService.GetRaceAsync("test_race");
+            Leaderboard = new ObservableCollection<Team>(race.Teams.OrderBy(x => x.Rank));
 
-            foreach (Team team in race.Teams.OrderBy(x => x.Rank))
-            {
-                _leaderboard.Add(team);
-            }
-
-            //_leaderboard = new ObservableCollection<Team>(race.Teams);
+            //foreach (Team team in race.Teams.OrderBy(x => x.Rank))
+            //{
+            //    _leaderboard.Add(team);
+            //}
         }
 
         private void GoToNextClue()
