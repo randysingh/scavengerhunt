@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Views;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
+using Windows.Security.Credentials;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
@@ -71,6 +73,10 @@ namespace Bootcamp2015.AmazingRace.ViewModels
                     try
                     {
                         user = await _serviceClient.LoginAsync(providerType);
+
+                        // Store in password vault for background task
+                        PasswordVaultHelper.provider = providerType;
+                        PasswordVaultHelper.PutInPasswordVault(user);
 
                         _settingsService.SetSerializedValue<MobileServiceUser>(provider, user);
 

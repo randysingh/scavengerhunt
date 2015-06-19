@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
+using Microsoft.WindowsAzure.MobileServices;
 using Windows.ApplicationModel.Background;
 
 namespace Bootcamp2015.AmazingRace.BackgroundTask
@@ -11,11 +9,19 @@ namespace Bootcamp2015.AmazingRace.BackgroundTask
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            //var deferral = taskInstance.GetDeferral();
+            var deferral = taskInstance.GetDeferral();
 
+            var credentials = PasswordVaultHelper.GetPasswordCredential();
+            var user = PasswordVaultHelper.GetUser();
+            var client = new MobileServiceClient(
+                Connections.MobileServicesUri, 
+                Connections.MobileServicesAppKey
+            );
+            client.CurrentUser = user;
 
+            LocationHelper.Start();
 
-            //deferral.Complete();
+            deferral.Complete();
         }
     }
 }
