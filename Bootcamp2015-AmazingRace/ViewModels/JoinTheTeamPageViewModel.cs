@@ -5,14 +5,18 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Windows.Input;
 using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
     public class JoinTheTeamPageViewModel : Screen
     {
-        private Profile currentUser;
         private readonly IDataService dataService;
         private readonly INavigationService navigationService;
+
+        private Profile currentUser;
+        private ICommand joinCommand;
+        private string teamCode;
 
         public Profile CurrentUser
         {
@@ -20,16 +24,18 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             set
             {
                 this.currentUser = value;
-                this.NotifyOfPropertyChange<Profile>(() => this.CurrentUser);
+                this.NotifyOfPropertyChange(() => this.CurrentUser);
+                this.NotifyOfPropertyChange(() => this.WelcomeMessage);
             }
         }
 
         public string WelcomeMessage
         {
-            get {
+            get
+            {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(@"Welcome, ");
-                if(this.CurrentUser != null)
+                if (this.CurrentUser != null)
                 {
                     sb.Append(this.CurrentUser.DisplayName ?? "Bryan");
                 }
@@ -42,13 +48,21 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        private ICommand joinCommand;
-
         public ICommand JoinCommand
         {
             get
             {
                 return new DelegateCommand(() => this.Join());
+            }
+        }
+
+        public string TeamCode
+        {
+            get { return this.teamCode; }
+            set
+            {
+                this.teamCode = value;
+                this.NotifyOfPropertyChange(() => this.TeamCode);
             }
         }
 
@@ -63,6 +77,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             base.OnInitialize();
 
             this.CurrentUser = await this.dataService.GetProfile();
+
         }
 
         protected override void OnActivate()
@@ -75,13 +90,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             base.OnDeactivate(close);
         }
 
-        private void Join()
+        private async void Join()
         {
             //joind the team
+            //var team = await this.dataService.PostJoinTeam(this.teamCode);
             //run background task
+            await BackgroundTaskHelpers.BackgroundTaskRegister();
             //move to Leaderboard
-
-            this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
+            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
         }
     }
 }

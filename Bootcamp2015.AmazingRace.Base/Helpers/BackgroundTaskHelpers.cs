@@ -7,7 +7,7 @@ namespace Bootcamp2015.AmazingRace.Base.Helpers
 {
     public class BackgroundTaskHelpers
     {
-        private const string TaskEntry = "Bootcamp2015.AmazingRace.BackgroundTask.ReportLocationBackgoundTask";
+        private const string TaskEntry = "Bootcamp2015.AmazingRace.BackgroundTask.ReportLocationBackgroundTask";
         private const string TaskName = "Amazing race task";
 
         public static async Task<bool> BackgroundTaskRegister()

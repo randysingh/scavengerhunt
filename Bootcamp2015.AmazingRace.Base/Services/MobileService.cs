@@ -10,21 +10,21 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 {
     public class MobileService : IMobileService
     {
-        private MobileServiceClient client;
+        public static MobileServiceClient client;
 
         public Microsoft.WindowsAzure.MobileServices.MobileServiceClient ServiceClient
         {
             get
             {
-                return this.client;
+                return client;
             }
         }
 
         public void Initialize()
         {
-            if (this.client == null)
+            if (client == null)
             {
-                this.client = new MobileServiceClient(ApplicationConstants.MobileServicesUri, ApplicationConstants.MobileServicesAppKey);
+                client = new MobileServiceClient(ApplicationConstants.MobileServicesUri, ApplicationConstants.MobileServicesAppKey);
             }
 
 

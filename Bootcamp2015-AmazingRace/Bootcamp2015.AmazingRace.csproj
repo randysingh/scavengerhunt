@@ -198,6 +198,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bootcamp2015.AmazingRace.BackgroundTask\Bootcamp2015.AmazingRace.BackgroundTask.csproj">
+      <Project>{ca6ead3d-8e98-47b5-bf38-3d079e9d2be4}</Project>
+      <Name>Bootcamp2015.AmazingRace.BackgroundTask</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
       <Project>{58ba43c5-0dc9-4af1-9ee6-4b8f7453c560}</Project>
       <Name>Bootcamp2015.AmazingRace.Base</Name>

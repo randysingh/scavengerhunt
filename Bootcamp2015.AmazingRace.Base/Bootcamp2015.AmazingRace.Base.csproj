@@ -82,6 +82,7 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="Connections.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="FakeIoC.cs" />
     <Compile Include="Helpers\BackgroundTaskHelpers.cs" />
     <Compile Include="Helpers\UpdateLocationHelper.cs" />
     <Compile Include="Models\Profile.cs" />

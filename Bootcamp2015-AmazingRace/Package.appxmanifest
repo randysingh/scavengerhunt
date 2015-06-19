@@ -24,6 +24,7 @@
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="Bootcamp2015.AmazingRace.BackgroundTask.ReportLocationBackgroundTask">
           <BackgroundTasks>
+            <Task Type="systemEvent" />
             <Task Type="timer" />
             <m2:Task Type="location" />
           </BackgroundTasks>
