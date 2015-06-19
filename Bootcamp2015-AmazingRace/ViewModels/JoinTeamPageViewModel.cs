@@ -15,18 +15,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         public ICommand GotoLeaderboardCommand
         {
-            get
-            {
-                return  new DelegateCommand(o => OnGotoLeaderboardPage());
-            }
+            get { return  new DelegateCommand(o => OnGotoLeaderboardPage()); }
         }
-
 
         public JoinTeamPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-
-            //GotoJoinTeamCommand = new DelegateCommand(o => OnGotoJoinTeamPage());
         }
 
         protected void OnGotoLeaderboardPage()
