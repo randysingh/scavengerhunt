@@ -90,7 +90,7 @@ namespace Bootcamp2015.AmazingRace
 
         #endregion
 
-        #region Application Lifecylcle
+        #region Application Lifecycle
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
