@@ -10,8 +10,9 @@
 
     <Grid>
         <StackPanel>
-            <Button Content="Login" Command="{Binding GotoJoinTeamCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,241,0,0"/>
-            <Image Source="http://logosandbrands.directory/wp-content/themes/directorypress/thumbs/Infusion-logo.jpg" HorizontalAlignment="Center" Height="114"  VerticalAlignment="Top" Width="231"/>
+        <TextBlock TextWrapping="Wrap" Text="Login" FontSize="36"/>
+        <TextBlock Text="Using your Google Account" FontSize="24" />
+         <Button Content="Login" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </StackPanel>
     </Grid>
