@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Activation;
+using Windows.Networking.PushNotifications;
 
 namespace Bootcamp2015.AmazingRace.Helpers
 {
@@ -23,13 +24,23 @@ namespace Bootcamp2015.AmazingRace.Helpers
             {
                 Init();
             }
+            
             return _mobileServiceClient;
         }
 
-        private static void Init()
+        private async static void pushes()
+        {
+            var operation = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+            List<string> Tags = new List<string>();
+            Tags.Add("8691941c-6763-4ed8-9a0a-539160d18dda");
+            await _mobileServiceClient.GetPush().RegisterNativeAsync(operation.Uri, Tags);
+        }
+
+        private async static void Init()
         {
             _skipCounter = 0;
             _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
+            pushes();
         }
 
         public async static void Login()
@@ -49,7 +60,7 @@ namespace Bootcamp2015.AmazingRace.Helpers
             var paramDictionary = new Dictionary<string, string>();
             paramDictionary.Add("joinCode", teamCode);
             JToken response = await _mobileServiceClient.InvokeApiAsync("profile", HttpMethod.Post, paramDictionary);
-
+            
         }
 
         public async static Task<Race> GetFirstRace()
@@ -104,7 +115,5 @@ namespace Bootcamp2015.AmazingRace.Helpers
         }
 
 
-
-         
     }
 }
