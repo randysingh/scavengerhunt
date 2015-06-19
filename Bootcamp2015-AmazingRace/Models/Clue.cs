@@ -11,12 +11,19 @@ namespace Bootcamp2015.AmazingRace.Models
         public class Clue
         {
             [JsonProperty("description")]
-            public string Description { get; set; }
-            [JsonProperty("location")]
-            public string Location { get; set; }
+            public string description { get; set; }
+
+            [JsonProperty("longitude")]
+            public string longitude { get; set; }
+
+            [JsonProperty("latitude")]
+            public string latitude { get; set; }
 
             [JsonProperty("id")]
-            public string ClueId { get; set; }
+            public string id { get; set; }
+
+            [JsonProperty("range")]
+            public string range { get; set; }
         }
     
 }

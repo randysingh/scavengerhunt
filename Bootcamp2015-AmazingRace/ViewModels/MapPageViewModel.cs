@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using Bootcamp2015.AmazingRace.Models;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,24 +15,22 @@ using Windows.UI.Xaml.Media;
 
 namespace Bootcamp2015.AmazingRace.ViewModels 
 {
-    class MapPageViewModel : Screen
+    public class MapPageViewModel : Screen, IParameterReceivable<Clue>
     {
         private Geolocator _locator;
         private Geopoint _mapcenter;
         private Geopoint _cluelocation;
         private CoreDispatcher _dispatcher;
+        private INavigationService _navigationService;
 
-        public MapPageViewModel(double latitude, double longitude)
+         public MapPageViewModel (INavigationService navigationService)
         {
-            _locator = new Geolocator() { ReportInterval = 1000 };
+            _navigationService = navigationService;
+            _locator = new Geolocator() { ReportInterval = 10000 };
 
             Pins = new ObservableCollection<PinViewModel>();
             
-            var geopos = new BasicGeoposition();
-            geopos.Latitude = latitude;
-            geopos.Longitude = longitude;
-            geopos.Altitude = 120.0;
-            _cluelocation = new Geopoint(geopos);
+            
         }
 
         public ObservableCollection<PinViewModel> Pins { get; set; }
@@ -41,6 +40,20 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             var pos = await _locator.GetGeopositionAsync();
             UpdateMyLocation(pos);
             UpdateClueLocation();
+        }
+
+        public Clue Clue { get; set; }
+
+        public void ProcessPayload(Clue payload)
+        {
+            // here is your received item
+            Clue = payload; //save payload
+            var geopos = new BasicGeoposition();
+            Double.TryParse(Clue.latitude, out geopos.Latitude);
+            Double.TryParse(Clue.longitude, out geopos.Longitude);
+            geopos.Altitude = 120.0;
+            _cluelocation = new Geopoint(geopos);
+            Refresh();
         }
 
         public Geolocator Locator
@@ -55,45 +68,32 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public Geopoint MapCenter
+        public Geopoint MapCenter { get; set; }
+
+        
+
+        protected override void OnActivate()
         {
-            get
-            {
-                return _mapcenter;
-            }
-            set
-            {
-                _mapcenter = value;
-                NotifyOfPropertyChange(() => MapCenter);
-            }
+            _locator.PositionChanged += OnLocatorPositionChanged;
+            base.OnActivate();
         }
 
-        public void UpdateClueLocation()
+        protected override void OnDeactivate(bool close)
         {
-            MapCenter = _cluelocation;
-            //RaisePropertyChanged("MapCenter");
+            _locator.PositionChanged -= OnLocatorPositionChanged;
+            base.OnDeactivate(close);
+        }
 
-            var pin = new PinViewModel
-            {
-                Text = "clue location",
-                Color = new SolidColorBrush(Colors.Red),
-                Location = _cluelocation
-            };
-
-            if (Pins.Count > 1)
-            {
-                Pins.RemoveAt(1);
-            }
-            Pins.Insert(1, pin);
+        private async void OnLocatorPositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            Caliburn.Micro.Execute.OnUIThread(() => UpdateMyLocation(args.Position));
         }
 
         public void UpdateMyLocation(Geoposition p)
         {
-            var pos = new Geopoint(p.Coordinate.Point.Position);
+            var pos = p.Coordinate.Point;
             MapCenter = pos;
-            
-            //RaisePropertyChanged("MapCenter");
-
+            NotifyOfPropertyChange(() => MapCenter);
             var pin = new PinViewModel
             {
                 Text = "current location",
@@ -108,14 +108,23 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             Pins.Insert(0, pin);
         }
 
-        /*public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged(string propertyName)
+        public void UpdateClueLocation()
         {
-            if (this.PropertyChanged != null)
+            MapCenter = _cluelocation;
+            NotifyOfPropertyChange(() => MapCenter);
+            var pin = new PinViewModel
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                Text = "clue location",
+                Color = new SolidColorBrush(Colors.Red),
+                Location = _cluelocation
+            };
+
+            if (Pins.Count > 1)
+            {
+                Pins.RemoveAt(1);
             }
-        }*/
+            Pins.Insert(1, pin);
+        }
 
         public class PinViewModel
         {

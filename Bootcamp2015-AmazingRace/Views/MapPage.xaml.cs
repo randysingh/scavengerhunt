@@ -1,4 +1,5 @@
-﻿using Bootcamp2015.AmazingRace.ViewModels;
+﻿using Bootcamp2015.AmazingRace.Models;
+using Bootcamp2015.AmazingRace.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,12 +26,9 @@ namespace Bootcamp2015.AmazingRace.Views
     /// </summary>
     public sealed partial class MapPage : Page
     {
-        MapPageViewModel mpvm;
         public MapPage()
         {
             this.InitializeComponent();
-            mpvm = new MapPageViewModel(47.6, -122.3);
-            this.DataContext = mpvm;
         }
 
         /// <summary>
@@ -40,24 +38,16 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-            mpvm.Refresh();
-            mpvm.Locator.PositionChanged += OnLocatorPositionChanged;
+            Clue parameter = e.Parameter as Clue;
+            if (DataContext is IParameterReceivable<Clue>)
+            {
+                ((IParameterReceivable<Clue>)DataContext).ProcessPayload(parameter);
+            }
         }
+        // Leaving this in for navigate position fix
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            mpvm.Locator.PositionChanged -= OnLocatorPositionChanged;
         }
-
-        private async void OnLocatorPositionChanged(Geolocator sender, PositionChangedEventArgs args)
-        {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            {
-                mpvm.UpdateMyLocation(args.Position);
-            });
-        }
-
-
     }
 }
