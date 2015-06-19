@@ -9,6 +9,7 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
         Task<Profile> GetProfile();
         Task<Team> PostJoinTeam(string joinCode);
         Task<Race> GetRace(string id);
+        Task<IEnumerable<Race>> GetRaceList();
         Task<IEnumerable<Clue>> GetClueList(string raceId);
         Task<Clue> GetClue(string id);
         Task<bool> PostTeamLocation(string raceId, double latitude, double longitude);
