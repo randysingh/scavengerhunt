@@ -9,11 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock FontSize="36" HorizontalAlignment="Left" Margin="85,195,0,0" TextWrapping="Wrap" Text="{Binding Clue.description, Mode=OneWay}" VerticalAlignment="Top"/>
-        <Button Content="Camera" Command="{Binding TakePictureCommand}" HorizontalAlignment="Left" Margin="148,404,0,0" VerticalAlignment="Top"/>
-        <Button Content="Skip" Command="{Binding GotoNextClueCommand}" HorizontalAlignment="Left" Margin="51,498,0,0" VerticalAlignment="Top"/>
+        <StackPanel>
+            <Button Content="Camera" Command="{Binding TakePictureCommand}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Content="Skip" Command="{Binding GotoNextClueCommand}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Content="Map&#xD;&#xA;" Command="{Binding GotoMapCommand}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBlock FontSize="36" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Clue.description, Mode=OneWay}" VerticalAlignment="Top"/>
 
-        <Button Content="Map&#xD;&#xA;" Command="{Binding GotoMapCommand}" HorizontalAlignment="Left" Margin="212,522,0,0" VerticalAlignment="Top"/>
-
+        </StackPanel>
     </Grid>
 </Page>
