@@ -28,9 +28,11 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         protected async void OnGotoCluePage()
         {
 
-            Clue fakeClue = new Clue { longitude = "47.2", latitude = "47.2" };
+
+            Clue _clue = await MobileServiceHelper.GetNextClue();
+
             // Pass in the clue to the view
-            _navigationService.NavigateToViewModel<CluePageViewModel>(fakeClue);
+            _navigationService.NavigateToViewModel<CluePageViewModel>(_clue);
 
             //TODO: Get real clue
         }
