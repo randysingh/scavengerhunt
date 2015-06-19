@@ -28,11 +28,13 @@ namespace Bootcamp2015.AmazingRace
     {
         private WinRTContainer container;
         private SettingsService settings;
+        private IAPIService api;
 
         public App()
         {
             this.InitializeComponent();
             settings = new SettingsService();
+
         }
 
         #region Bootstrapper
@@ -52,6 +54,7 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
+            container.RegisterInstance(typeof(IAPIService), null, api);
 
         }
 

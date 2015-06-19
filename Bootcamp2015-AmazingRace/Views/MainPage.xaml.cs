@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Services;
 using Bootcamp2015.AmazingRace.Helpers;
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -13,10 +14,8 @@ namespace Bootcamp2015.AmazingRace.Views
     /// </summary>
     public sealed partial class MainPage : IWebAuthenticationContinuable
     {
-        public static MobileServiceClient _mobileServiceClient;
         public MainPage()
         {
-            _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
@@ -40,14 +39,14 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private async void GoogleLoginClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var result = await _mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
+            var result = await APIService._mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
         }
 
         public void ContinueWebAuthentication(Windows.ApplicationModel.Activation.WebAuthenticationBrokerContinuationEventArgs args)
         {
             if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
             {
-                _mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+                APIService._mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
             LoginPrompt.Text = "Thank you for logging in. Please press Continue to proceed.";
             GoogleLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;

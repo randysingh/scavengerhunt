@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,12 +26,7 @@ namespace Bootcamp2015.AmazingRace.Views
         public RegistrationPage()
         {
             this.InitializeComponent();
-            TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1");
-            RaceComboBox.Items.Add("Race1"); RaceComboBox.Items.Add("Race1");
-            RaceComboBox.Items.Add("Race1");
-            RaceComboBox.Items.Add("Race1");
-            RaceComboBox.Items.Add("Race1");
-
+            ContinueButton.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
         /// <summary>
@@ -40,7 +36,7 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            var x = MainPage._mobileServiceClient.CurrentUser;
         }
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -51,6 +47,17 @@ namespace Bootcamp2015.AmazingRace.Views
         private void LogoutClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
+        }
+
+        private async void JoinTeam(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            
+
+            var g = await MainPage._mobileServiceClient.InvokeApiAsync("Profile", HttpMethod.Get, new Dictionary<string, string>() { 
+            
+            });
+
+            ContinueButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
     }
 }

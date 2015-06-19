@@ -4,13 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{58BA43C5-0DC9-4AF1-9EE6-4B8F7453C560}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{2A293FDA-A504-4000-B179-B911DECD3B32}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bootcamp2015.AmazingRace.Base</RootNamespace>
-    <AssemblyName>Bootcamp2015.AmazingRace.Base</AssemblyName>
+    <RootNamespace>Bootcamp2015.AmazingRace</RootNamespace>
+    <AssemblyName>Bootcamp2015-AmazingRace</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -18,6 +16,7 @@
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,6 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -79,37 +79,132 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="APIModels\joinTeamValues.cs" />
-    <Compile Include="Connections.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationConstants.cs" />
+    <Compile Include="Caliburn\Micro\Logging\DebugLogger.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ContinuationManager.cs" />
+    <Compile Include="ViewModels\LeaderboardPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Views\CluePage.xaml.cs">
+      <DependentUpon>CluePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeaderboardPage.xaml.cs">
+      <DependentUpon>LeaderboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceInterfaces\IAPIService.cs" />
-    <Compile Include="ServiceInterfaces\IMessageDialogService.cs" />
-    <Compile Include="ServiceInterfaces\ISettingsService.cs" />
-    <Compile Include="Services\APIService.cs" />
-    <Compile Include="Services\MessageDialogService.cs" />
-    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Views\PermissionsPage.xaml.cs">
+      <DependentUpon>PermissionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.WindowsAzure.Mobile">
-      <HintPath>..\packages\WindowsAzure.MobileServices.1.3.2\lib\wpa81\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\SmallLogo.scale-240.png" />
+    <Content Include="Assets\SplashScreen.scale-240.png" />
+    <Content Include="Assets\Square71x71Logo.scale-240.png" />
+    <Content Include="Assets\StoreLogo.scale-240.png" />
+    <Content Include="Assets\WideLogo.scale-240.png" />
+    <Content Include="Assets\scavenger-hunt.jpg" />
+    <Content Include="StoreManifest.xml" />
+    <None Include="Package.StoreAssociation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="ApplicationStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\CluePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PermissionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Caliburn.Micro, Version=2.0.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.Core.2.0.2\lib\portable-net45+win8+wp8+wpa81\Caliburn.Micro.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
+    <Reference Include="Caliburn.Micro.Extensions, Version=2.0.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\wpa81\Caliburn.Micro.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Logging">
+      <HintPath>..\packages\Caliburn.Micro.Logging.2.0.3.0\lib\portable-net45+win+wpa81+wp80\Caliburn.Micro.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Platform, Version=2.0.2.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Caliburn.Micro.2.0.2\lib\wpa81\Caliburn.Micro.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.MobileServices.1.3.2\lib\wpa81\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.MobileServices.1.3.2\lib\wpa81\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions">
+    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives">
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
+      <Project>{58ba43c5-0dc9-4af1-9ee6-4b8f7453c560}</Project>
+      <Name>Bootcamp2015.AmazingRace.Base</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

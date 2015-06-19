@@ -98,6 +98,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MapPage.xaml.cs" />
     <Compile Include="Views\PermissionsPage.xaml.cs">
       <DependentUpon>PermissionsPage.xaml</DependentUpon>
     </Compile>
@@ -140,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MapPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -200,12 +205,7 @@
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
-      <Project>{58ba43c5-0dc9-4af1-9ee6-4b8f7453c560}</Project>
-      <Name>Bootcamp2015.AmazingRace.Base</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
