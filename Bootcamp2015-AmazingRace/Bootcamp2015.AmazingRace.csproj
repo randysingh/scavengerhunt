@@ -102,7 +102,6 @@
     <Compile Include="Views\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MapPage.xaml.cs" />
     <Compile Include="Views\PermissionsPage.xaml.cs">
       <DependentUpon>PermissionsPage.xaml</DependentUpon>
     </Compile>

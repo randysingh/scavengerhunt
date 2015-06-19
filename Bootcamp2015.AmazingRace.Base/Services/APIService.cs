@@ -12,7 +12,7 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 {
     public class APIService : IAPIService
     {
-        public static MobileServiceClient _mobileServiceClient;
+        public MobileServiceClient _mobileServiceClient;
         public APIService()
         {
             _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);

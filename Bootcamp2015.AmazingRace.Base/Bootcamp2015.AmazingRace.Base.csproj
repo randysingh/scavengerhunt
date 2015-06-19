@@ -86,8 +86,6 @@
     <Compile Include="ServiceInterfaces\IMessageDialogService.cs" />
     <Compile Include="ServiceInterfaces\ISettingsService.cs" />
     <Compile Include="Services\APIService.cs" />
-    <Compile Include="ServiceInterfaces\INavigationService.cs" />
-    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\MessageDialogService.cs" />
     <Compile Include="Services\SettingsService.cs" />
   </ItemGroup>

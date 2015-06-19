@@ -28,8 +28,9 @@ namespace Bootcamp2015.AmazingRace
     {
         private WinRTContainer container;
         private SettingsService settings;
-        private APIService api;
+        private static APIService api;
 
+        public static APIService Api{ get{return api;}}
         public App()
         {
             this.InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bootcamp2015.AmazingRace.Base.APIModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var x = MainPage._mobileServiceClient.CurrentUser;
+            
         }
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -51,7 +52,7 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private async void JoinTeam(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            joinTeamValues returned_Values = api.SignupForTeam(teamIdBox.Text);
+            joinTeamValues returned_Values = await App.Api.SignupForTeam(teamIdBox.Text);
 
             ContinueButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }
