@@ -9,6 +9,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Welcome, Bryan!" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Complete your registration by providing your team code." FontSize="20" TextWrapping="WrapWholeWords" VerticalAlignment="Center" />
+        <TextBox Grid.Row="5" Grid.Column="1" Text="Enter Team Code" FontSize="18" VerticalAlignment="Center" />
+        <Button Content="Join" Grid.Column="1" Grid.Row="6" />
     </Grid>
 </Page>

@@ -10,8 +10,36 @@
     Background="Black">
 
     <Grid>
-        <Image HorizontalAlignment="Center" Height="122" Margin="0,70,0,0" VerticalAlignment="Top" Width="252" Source="ms-appx:///Assets/WideLogo.png"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,350,0,0" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontSize="24"/>
-        <Button Name="LoginButton" Command="{Binding LoginCommand}"></Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+       
+        <Image HorizontalAlignment="Center" Height="122" VerticalAlignment="Top" Width="252" Source="ms-appx:///Assets/WideLogo.png" Grid.Row="1" Grid.Column="1"/>
+        
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />         
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+        
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Login" VerticalAlignment="Center"  FontSize="24" Grid.Row="0" Height="29" Width="59" Grid.Column="0" Grid.ColumnSpan="2" />
+            <Button MinWidth="70" MinHeight="70" Name="LoginButton" Command="{Binding LoginCommand}" Width="70" VerticalAlignment="Top" HorizontalAlignment="Center" Height="70" Grid.Row="1" Grid.Column="1"></Button>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Using your Google Account" VerticalAlignment="Top" FontSize="20" Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" />
+        </Grid>
     </Grid>
 </Page>
