@@ -29,8 +29,6 @@ namespace Bootcamp2015.AmazingRace.Views
         public LeaderboardPage()
         {
             this.InitializeComponent();
-
-       
         }
 
  

@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Common;
+using Bootcamp2015.AmazingRace.Helpers;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
@@ -13,24 +14,26 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private INavigationService _navigationService;
 
-        public ICommand GotoLeaderboardCommand
+        private String _teamCode;
+        public String TeamCode
         {
-            get
-            {
-                return  new DelegateCommand(o => OnGotoLeaderboardPage());
-            }
+            get { return _teamCode; }
+            set { _teamCode = value; NotifyOfPropertyChange(); }
         }
 
+        public ICommand GotoLeaderboardCommand
+        {
+            get { return  new DelegateCommand(o => OnGotoLeaderboardPage()); }
+        }
 
         public JoinTeamPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-
-            //GotoJoinTeamCommand = new DelegateCommand(o => OnGotoJoinTeamPage());
         }
 
         protected void OnGotoLeaderboardPage()
         {
+            MobileServiceHelper.JoinTeam(this._teamCode);
             _navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
         }
     }
