@@ -23,7 +23,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public JoinTeamPageViewModel(INavigationService navigationService, IDataService dataService)
         {
             _navigationService = navigationService;
-            _dataService = dataService;
+            //_dataService = dataService;
 
             JoinTeam = new DelegateCommand(() => JoinTeamAction());
         }

@@ -81,7 +81,7 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterNavigationService(rootFrame);
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
-            container.RegisterInstance(typeof(IDataService), null, typeof(DataService));
+            container.RegisterSingleton(typeof(IDataService), null, typeof(DataService));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
         }

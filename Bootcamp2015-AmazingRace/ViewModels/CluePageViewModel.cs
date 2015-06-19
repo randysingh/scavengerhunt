@@ -45,7 +45,6 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             //args.Files.Cound
-            throw new NotImplementedException();
         }
 
         private void ShowMap()
