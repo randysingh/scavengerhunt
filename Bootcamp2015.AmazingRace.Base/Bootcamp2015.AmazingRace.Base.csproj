@@ -90,6 +90,7 @@
     <Compile Include="ServiceInterfaces\ISettingsService.cs" />
     <Compile Include="Services\MessageDialogService.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\WindowsNavigationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

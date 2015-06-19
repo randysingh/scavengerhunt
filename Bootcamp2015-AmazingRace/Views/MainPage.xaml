@@ -2,9 +2,12 @@
     x:Class="Bootcamp2015.AmazingRace.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Bootcamp2015.AmazingRace"
+    xmlns:local="using:Bootcamp2015.AmazingRace.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="using:Bootcamp2015.AmazingRace.ViewModels"
+    xmlns:micro="using:Caliburn.Micro"
+    micro:Bind.AtDesignTime="True"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -12,8 +15,8 @@
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" Margin="10,10,10,10">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Amazing Smart Client Race" FontSize="50" Margin="0,0,0,30"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Login" FontSize="30"/>
-            <Button Content="Using your Google Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnGoogle_Click"/>
-            <Button Content="Using your Facebook Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnFacebook_Click"/>
+            <Button Content="Using your Google Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding GoogleLogin}"/>
+            <Button Content="Using your Facebook Account" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding FacebookLogin}"/>
         </StackPanel>
     </Grid>
 </Page>

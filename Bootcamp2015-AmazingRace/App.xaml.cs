@@ -54,7 +54,9 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterSharingService();
 
             container.PerRequest<MainPageViewModel>();
+            container.PerRequest<JoinTeamPageViewModel>();
 
+            container.RegisterSingleton(typeof(INavigationService), null, typeof(WindowsNavigationService));
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
