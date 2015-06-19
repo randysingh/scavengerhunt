@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bootcamp2015.AmazingRace.Base;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,16 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private async void OnRegisterBackgroundTask(object sender, RoutedEventArgs e)
+        {
+            await BackgroundTaskHelpers.BackgroundTaskRegister();
+        }
+
+        private void OnUnregisterBackgroundTask(object sender, RoutedEventArgs e)
+        {
+            BackgroundTaskHelpers.BackgroundTaskRemove();
         }
     }
 }
