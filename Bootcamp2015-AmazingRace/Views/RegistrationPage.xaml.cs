@@ -51,11 +51,7 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private async void JoinTeam(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            
-
-            var g = await MainPage._mobileServiceClient.InvokeApiAsync("Profile", HttpMethod.Get, new Dictionary<string, string>() { 
-            
-            });
+            joinTeamValues returned_Values = api.SignupForTeam(teamIdBox.Text);
 
             ContinueButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }

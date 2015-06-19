@@ -28,13 +28,13 @@ namespace Bootcamp2015.AmazingRace
     {
         private WinRTContainer container;
         private SettingsService settings;
-        private IAPIService api;
+        private APIService api;
 
         public App()
         {
             this.InitializeComponent();
             settings = new SettingsService();
-
+            api = new APIService();
         }
 
         #region Bootstrapper

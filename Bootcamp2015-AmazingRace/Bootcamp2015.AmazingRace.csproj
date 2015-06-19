@@ -209,16 +209,13 @@
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Downloads\scavengerhunt-master\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
+    <ProjectReference Include="..\Bootcamp2015.AmazingRace.Base\Bootcamp2015.AmazingRace.Base.csproj">
       <Project>{58ba43c5-0dc9-4af1-9ee6-4b8f7453c560}</Project>
       <Name>Bootcamp2015.AmazingRace.Base</Name>
     </ProjectReference>
   </ItemGroup>
-=======
   <ItemGroup />
->>>>>>> 4744a7da5e0f7f44f457697a4bb7687a4eec64a7
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

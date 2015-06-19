@@ -39,14 +39,14 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private async void GoogleLoginClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var result = await APIService._mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
+            var result = await api._mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
         }
 
         public void ContinueWebAuthentication(Windows.ApplicationModel.Activation.WebAuthenticationBrokerContinuationEventArgs args)
         {
             if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
             {
-                APIService._mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+                api._mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
             LoginPrompt.Text = "Thank you for logging in. Please press Continue to proceed.";
             GoogleLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
