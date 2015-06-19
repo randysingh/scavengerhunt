@@ -36,10 +36,6 @@ namespace Bootcamp2015.AmazingRace.Views
         {
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void LogoutClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainPage));
@@ -47,7 +43,19 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private void ViewClick(object sender, RoutedEventArgs e)
         {
+            // make api call to get clue
             Frame.Navigate(typeof(MapPage));
+        }
+
+        private void PhotoClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void SkipClick(object sender, RoutedEventArgs e)
+        {
+            // api call to GET api/clue/{id} with a new clue id
+            // make sure only unsolved clues displayed
         }
     }
 }

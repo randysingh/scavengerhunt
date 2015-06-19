@@ -151,48 +151,6 @@ namespace Bootcamp2015.AmazingRace.Views
 
         #endregion
 
-        #region Geofence
-
-        private async void OnGeofenceClick(object sender, RoutedEventArgs e)
-        {
-
-            var pin = new PinViewModel
-            {
-                Text = "geofence",
-                Color = new SolidColorBrush(Colors.Blue),
-                Location = _map.Center,
-                CanGetDirections = true,
-            };
-            Pins.Add(pin);
-
-
-            var g1 = new Geocircle(_map.Center.Position, 300);
-            var geofence = new Geofence("geo1", g1, MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited, false, TimeSpan.FromSeconds(1));
-
-            var currentGeo = GeofenceMonitor.Current.Geofences.FirstOrDefault(g => g.Id == "geo1");
-            if (currentGeo != null)
-            {
-                GeofenceMonitor.Current.Geofences.Remove(currentGeo);
-            }
-
-            GeofenceMonitor.Current.Geofences.Add(geofence);
-
-            GeofenceMonitor.Current.GeofenceStateChanged += Current_GeofenceStateChanged;
-        }
-
-        private void Current_GeofenceStateChanged(GeofenceMonitor sender, object args)
-        {
-            var res = sender.ReadReports();
-
-            foreach (var fence in res)
-            {
-                var str = string.Format("Fence {0} - {1}", fence.Geofence.Id, fence.NewState.ToString());
-            }
-        }
-
-
-
-        #endregion
     }
 
     public class PinViewModel
