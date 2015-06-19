@@ -52,7 +52,7 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private async void JoinTeam(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            joinTeamValues returned_Values = await App.Api.SignupForTeam(teamIdBox.Text);
+            await App.Api.SignupForTeam(teamIdBox.Text);
 
             ContinueButton.Visibility = Windows.UI.Xaml.Visibility.Visible;
         }

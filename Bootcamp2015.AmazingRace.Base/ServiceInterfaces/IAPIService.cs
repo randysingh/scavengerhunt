@@ -9,6 +9,7 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
 {
     public interface IAPIService
     {
-        Task<joinTeamValues> SignupForTeam(string TeamID);
+        Task SignupForTeam(string TeamID);
+        Task<LeaderboardValues> getLeaderBoards();
     }
 }

@@ -80,6 +80,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="APIModels\joinTeamValues.cs" />
+    <Compile Include="APIModels\LeaderboardValues.cs" />
+    <Compile Include="APIModels\RaceValues.cs" />
     <Compile Include="Connections.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
