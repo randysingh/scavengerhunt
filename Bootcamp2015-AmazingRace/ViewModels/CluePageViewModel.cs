@@ -51,6 +51,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
+        public ICommand GotoMapCommand
+        {
+            get
+            {
+                return new DelegateCommand(o => OnGotoMapPage());
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -83,7 +91,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         // Called after user selects a file
         public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {           
-            Clue newClue = new Clue() { Description = args.Files.First<StorageFile>().Name };
+            Clue newClue = new Clue() { description = args.Files.First<StorageFile>().Name };
             Clue = newClue;
         }
 
@@ -92,6 +100,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         protected void OnGotoCluePage()
         {
             _navigationService.NavigateToViewModel<CluePageViewModel>();
+        }
+
+        protected void OnGotoMapPage()
+        {
+            Clue fakeClue = new Clue { longitude = "47.2", latitude = "47.2" };
+            _navigationService.NavigateToViewModel<MapPageViewModel>(fakeClue);
         }
 
         #endregion
