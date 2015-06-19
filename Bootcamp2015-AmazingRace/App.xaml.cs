@@ -50,6 +50,7 @@ namespace Bootcamp2015.AmazingRace
                 .PerRequest<JoinTeamPageViewModel>()
                 .PerRequest<LeaderboardPageViewModel>()
                 .PerRequest<CluePageViewModel>()
+                .PerRequest<MapPageViewModel>()
             ;
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
