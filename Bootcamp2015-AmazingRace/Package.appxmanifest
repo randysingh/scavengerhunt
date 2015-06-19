@@ -22,7 +22,7 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Bootcamp2015.AmazingRace.BackgroundTask.ReportLocationBackgoundTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Bootcamp2015.AmazingRace.BackgroundTask.ReportLocationBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />
             <m2:Task Type="location" />
