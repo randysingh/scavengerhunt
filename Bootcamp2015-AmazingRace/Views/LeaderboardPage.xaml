@@ -21,7 +21,7 @@
                   ItemTemplate="{StaticResource LeaderboardTeamTemplate}">
             </ListView>
 
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Team name" FontSize="30" Margin="0,30,0,10"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TeamName}" FontSize="30" Margin="0,30,0,10"/>
             <Button Content="Next clue" HorizontalAlignment="Stretch" Command="{Binding JoinTeam}"/>
         </StackPanel>
     </Grid>

@@ -17,31 +17,57 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly ISettingsService _settingsService;
 
-        private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
+        public ObservableCollection<Team> Leaderboard { get; set; }
 
-        public ICommand JoinTeam { get; set; }
-
-        public List<Team> Leaderboard
+        // For Caliburn's passing in object
+        public Team CurrentTeam { get; set; }
+        public Team Parameter
         {
-            get
+            set
             {
-                return _teams.OrderBy(e => e.Points).ToList();
+                CurrentTeam = value;
             }
         }
 
-        public LeaderboardPageViewModel(INavigationService navigationService, IDataService dataService)
+        public ICommand JoinTeam { get; set; }
+
+        public string TeamName
+        {
+            get
+            {
+                return "TEAM NAME";
+                //return _currentTeam.Name; 
+            }
+        }
+
+        public LeaderboardPageViewModel(INavigationService navigationService,
+            IDataService dataService, ISettingsService settingsService)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _settingsService = settingsService;
 
             JoinTeam = new DelegateCommand(() => GoToNextClue());
 
-            //_teams = _dataService.GetRaceAsync()
+            // Get current team
+            //_currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+
+            // Get race info (leaderboards)
+            Task.Run(() => GetLeaderboards()).Wait();
+        }
+
+        private async void GetLeaderboards()
+        {
+            Race race = await _dataService.GetRaceAsync("test_race");
+            Leaderboard = new ObservableCollection<Team>(race.Teams.OrderBy(x => x.Rank));
         }
 
         private void GoToNextClue()
         {
+            // TODO: hide button if no clues
+
             _navigationService.Navigate(typeof(CluePage));
         }
     }

@@ -6,9 +6,9 @@
     <DataTemplate x:Key="LeaderboardTeamTemplate">
         <StackPanel>
             <TextBlock>
-                <Run Text="{Binding Leaderboard.TeamName}" />
+                <Run Text="{Binding Team.Name}" />
                 <Run>(</Run>
-                <Run Text="{Binding Leaderboard.Points}" />
+                <Run Text="{Binding Team.Points}" />
                 <Run> points)</Run>
             </TextBlock>
         </StackPanel>
