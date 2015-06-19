@@ -40,7 +40,7 @@
         <Border Height="1" Background="#77777777" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Background="#77777777">
-            <Button Content="Locate" Click="OnRefreshClick" Margin="5,0" HorizontalAlignment="Center" />
+            <!--<Button Content="Locate" Click="OnRefreshClick" Margin="5,0" HorizontalAlignment="Center" />-->
         </StackPanel>
     </Grid>
 </Page>

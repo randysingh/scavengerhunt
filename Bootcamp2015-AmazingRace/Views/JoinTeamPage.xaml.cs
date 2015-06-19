@@ -28,5 +28,7 @@ namespace Bootcamp2015.AmazingRace.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+        
+        public object NavigationParameter { get; set; }
     }
 }

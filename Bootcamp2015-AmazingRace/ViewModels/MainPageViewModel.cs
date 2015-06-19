@@ -73,8 +73,10 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void DoGoogleLogin()
         {
-            if (await AuthenticateGoogle())
-                _navigationService.Navigate(typeof(JoinTeamPage));
+            //if (await AuthenticateGoogle())
+            //    _navigationService.Navigate(typeof(JoinTeamPage));
+
+            _navigationService.Navigate(typeof(JoinTeamPage));
         }
 
         private async void DoFacebookLogin()

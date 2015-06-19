@@ -8,21 +8,10 @@ using Caliburn.Micro;
 using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 namespace Bootcamp2015.AmazingRace
 {
@@ -55,13 +44,13 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterWinRTServices();
             container.RegisterSharingService();
 
-            container.PerRequest<MainPageViewModel>();
+            container.PerRequest<CluePageViewModel>();
             container.PerRequest<JoinTeamPageViewModel>();
+            container.PerRequest<LeaderboardPageViewModel>();
+            container.PerRequest<MainPageViewModel>();
+            container.PerRequest<MapPageViewModel>();
 
-            container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
-            container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
-            container.RegisterInstance(typeof(ISettingsService), null, settings);
-            container.RegisterInstance(typeof(IDataService), null, typeof(DataService));
+            PrepareViewFirst();
         }
 
         protected override object GetInstance(Type service, string key)
@@ -87,14 +76,19 @@ namespace Bootcamp2015.AmazingRace
 
         #region Navigation Service
 
-        public INavigationService NavigationService
-        {
-            get { return (INavigationService)container.GetInstance(typeof(INavigationService), null); }
-        }
-
         protected override void PrepareViewFirst(Frame rootFrame)
         {
             container.RegisterNavigationService(rootFrame);
+
+            container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
+            container.RegisterInstance(typeof(IDataService), null, typeof(DataService));
+            container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
+            container.RegisterInstance(typeof(ISettingsService), null, settings);
+        }
+
+        public INavigationService NavigationService
+        {
+            get { return (INavigationService)container.GetInstance(typeof(INavigationService), null); }
         }
 
         #endregion
@@ -129,6 +123,7 @@ namespace Bootcamp2015.AmazingRace
         {
             base.OnResuming(sender, e);
         }
+
         protected override void OnSuspending(object sender, SuspendingEventArgs e)
         {
             base.OnSuspending(sender, e);

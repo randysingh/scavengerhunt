@@ -15,8 +15,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
-
-
+        
         public string TeamCode { get; set; }
 
         public ICommand JoinTeam { get; set; }
