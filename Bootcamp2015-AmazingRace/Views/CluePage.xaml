@@ -9,6 +9,37 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Clue" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="24" />
+        <Button BorderThickness="1" Content="&lt; Leaderboard" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" FontSize="12" VerticalAlignment="Center" Command="{Binding BackToLeaderboardCommand}" />
+        
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="2" Grid.Column="1" Text="Insert yourself into a street performance. (50 points)" FontSize="22" TextWrapping="WrapWholeWords" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        
+        <TextBlock Text="View" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" />
+        <Button Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="3" Grid.Row="3" />
+
+        <TextBlock Text="Upload Photo" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" />
+        <Button Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="3" Grid.Row="4" />
+
+        <TextBlock Text="Skip" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" />
+        <Button Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="3" Grid.Row="5" />
+
 
     </Grid>
 </Page>
