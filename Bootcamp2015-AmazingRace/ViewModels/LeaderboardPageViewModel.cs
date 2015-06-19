@@ -25,7 +25,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         public ICommand JoinTeam { get; set; }
 
-        public string TeamName { get { return _currentTeam.Name; } }
+        public string TeamName { 
+            get {
+                return "TEAM NAME";
+                //return _currentTeam.Name; 
+            } 
+        }
 
         public List<Team> Leaderboard
         {
@@ -45,7 +50,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             JoinTeam = new DelegateCommand(() => GoToNextClue());
 
             // Get current team
-            _currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+            //_currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
 
             // Get race info (leaderboards)
             //Race race = _dataService.GetRaceAsync(currentTeam.);
