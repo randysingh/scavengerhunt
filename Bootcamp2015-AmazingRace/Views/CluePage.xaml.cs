@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bootcamp2015.AmazingRace.Models;
+using Bootcamp2015.AmazingRace.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +36,12 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // Since we receive the parameter in the view, send it to the viewmodel
+            Clue parameter = e.Parameter as Clue;
+            if (DataContext is IParameterReceivable<Clue>)
+            {
+                ((IParameterReceivable<Clue>)DataContext).ProcessPayload(parameter);
+            }
         }
     }
 }

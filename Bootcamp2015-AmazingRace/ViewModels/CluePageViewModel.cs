@@ -10,9 +10,21 @@ using System.Windows.Input;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
-    public class LeaderboardPageViewModel : Screen
+    public class CluePageViewModel : Screen, IParameterReceivable<Clue>
     {
         private INavigationService _navigationService;
+
+        private Clue _clue;
+        public Clue Clue
+        {
+            get { return _clue; }
+            set { 
+                _clue = value;
+                NotifyOfPropertyChange();
+            }
+        }
+
+
 
         public ICommand GotoClueCommand
         {
@@ -23,7 +35,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         }
 
 
-        public LeaderboardPageViewModel(INavigationService navigationService)
+        public CluePageViewModel (INavigationService navigationService)
         {
             _navigationService = navigationService;
 
@@ -32,9 +44,13 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         protected void OnGotoCluePage()
         {
-            Clue fakeClue = new Clue { Description = "dfsd" };
-            // Pass in the clue to the view
-            _navigationService.NavigateToViewModel<CluePageViewModel>(fakeClue);
+            _navigationService.NavigateToViewModel<CluePageViewModel>();
+        }
+
+        public void ProcessPayload(Clue payload)
+        {
+            // here is your received item
+            Clue = payload; //save payload
         }
     }
 }
