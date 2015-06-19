@@ -29,25 +29,13 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        // For Caliburn's passing in object
         public Team CurrentTeam { get; set; }
-        public Team Parameter
-        {
-            set
-            {
-                CurrentTeam = value;
-            }
-        }
 
         public ICommand JoinTeam { get; set; }
 
         public string TeamName
         {
-            get
-            {
-                return "TEAM NAME";
-                //return _currentTeam.Name; 
-            }
+            get { return CurrentTeam.Name; }
         }
 
         public LeaderboardPageViewModel(INavigationService navigationService,
@@ -60,21 +48,16 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             JoinTeam = new DelegateCommand(() => GoToNextClue());
 
             // Get current team
-            //_currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+            CurrentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
 
             // Get race info (leaderboards)
-            Task.Run(() => GetLeaderboards()).Wait();
+            GetLeaderboards();
         }
 
         private async void GetLeaderboards()
         {
             Race race = await _dataService.GetRaceAsync("test_race");
             Leaderboard = new ObservableCollection<Team>(race.Teams.OrderBy(x => x.Rank));
-
-            //foreach (Team team in race.Teams.OrderBy(x => x.Rank))
-            //{
-            //    _leaderboard.Add(team);
-            //}
         }
 
         private void GoToNextClue()

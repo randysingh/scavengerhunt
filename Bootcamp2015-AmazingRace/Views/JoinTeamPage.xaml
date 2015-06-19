@@ -12,7 +12,7 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="Auto" Margin="10,10,10,10">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Welcome!" FontSize="30" Margin="0,0,0,30"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding NameGreeting}" FontSize="30" Margin="0,0,0,30"/>
             
             <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap">
                 <TextBlock.Text>

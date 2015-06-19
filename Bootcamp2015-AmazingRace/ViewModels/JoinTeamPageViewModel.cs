@@ -20,6 +20,16 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private readonly IDataService _dataService;
         private readonly ISettingsService _settingsService;
 
+        private string _nameGreeting;
+        public string NameGreeting
+        {
+            get { return _nameGreeting; }
+            set
+            {
+                _nameGreeting = value == null ? "Welcome!" : String.Format("Welcome {0}!", value);
+            }
+        }
+
         public string TeamCode { get; set; }
 
         public ICommand JoinTeam { get; set; }
@@ -41,21 +51,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private async void LoadProfileAsync()
         {
             Profile profile = await _dataService.GetProfileAsync();
-            _settingsService.SetSerializedValue<Profile>("profile", profile);
+            _settingsService.SetSerializedValue<Profile>("PROFILE", profile);
+            NameGreeting = profile.Name;
         }
 
         private async void JoinTeamAction()
         {
-            string message;
-            try
-            {
-                Team result = await _dataService.JoinTeamAsync(TeamCode);
-                _settingsService.SetSerializedValue<Team>("team", result);
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                message = ex.Message;
-            }
+            Team team = await _dataService.JoinTeamAsync(TeamCode);
+            _settingsService.SetSerializedValue<Team>("TEAM", team);
 
             _navigationService.Navigate(typeof(LeaderboardPage));
         }

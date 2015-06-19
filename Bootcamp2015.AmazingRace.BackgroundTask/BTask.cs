@@ -11,11 +11,11 @@ namespace Bootcamp2015.AmazingRace.BackgroundTask
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            var deferral = taskInstance.GetDeferral();
+            //var deferral = taskInstance.GetDeferral();
 
 
 
-            deferral.Complete();
+            //deferral.Complete();
         }
     }
 }
