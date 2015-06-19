@@ -1,3 +1,4 @@
+
 ﻿using Bootcamp2015.AmazingRace.Base.Helpers;
 using Bootcamp2015.AmazingRace.Base.Services;
 using Bootcamp2015.AmazingRace.Common;
@@ -46,7 +47,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public ICommand GotoClueCommand
+        public ICommand GotoNextClueCommand
         {
             get
             {
@@ -97,8 +98,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             
-            Clue newClue = new Clue() { description = args.Files.First<StorageFile>().Name };
-            Clue = newClue;
+            //Clue newClue = new Clue() { description = args.Files.First<StorageFile>().Name };
+            //Clue = newClue;
 
             UploadHelper upload = new UploadHelper();
 
@@ -124,15 +125,17 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         #endregion
 
-        protected void OnGotoCluePage()
+        protected async void OnGotoCluePage()
         {
-            _navigationService.NavigateToViewModel<CluePageViewModel>();
+            MobileServiceHelper.IncrementSkip();
+            Clue c = await MobileServiceHelper.GetNextClue();
+            _navigationService.NavigateToViewModel<CluePageViewModel>(c);
         }
 
         protected void OnGotoMapPage()
         {
-            Clue fakeClue = new Clue { longitude = "47.2", latitude = "47.2" };
-            _navigationService.NavigateToViewModel<MapPageViewModel>(fakeClue);
+           
+            _navigationService.NavigateToViewModel<MapPageViewModel>(Clue);
         }
 
         #endregion

@@ -44,7 +44,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         public Clue Clue { get; set; }
 
-        public void ProcessPayload(Clue payload)
+        public async void ProcessPayload(Clue payload)
         {
             // here is your received item
             Clue = payload; //save payload
@@ -53,7 +53,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             Double.TryParse(Clue.longitude, out geopos.Longitude);
             geopos.Altitude = 120.0;
             _cluelocation = new Geopoint(geopos);
-            Refresh();
+            await Refresh();
         }
 
         public Geolocator Locator

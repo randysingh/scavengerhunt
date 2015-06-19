@@ -92,6 +92,8 @@
     <Compile Include="Helpers\BitmapImageHelper.cs" />
     <Compile Include="Helpers\ContinuationManager.cs" />
     <Compile Include="Helpers\MobileServiceHelper.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\RaceStatus.cs" />
     <Compile Include="Models\Race.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Clue.cs" />
@@ -125,6 +127,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\Infusion-logo.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />

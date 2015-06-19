@@ -9,6 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Content="Button" Command="{Binding GotoJoinTeamCommand}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel>
+            <Button Content="Login" Command="{Binding GotoJoinTeamCommand}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,241,0,0"/>
+            <Image Source="http://logosandbrands.directory/wp-content/themes/directorypress/thumbs/Infusion-logo.jpg" HorizontalAlignment="Center" Height="114"  VerticalAlignment="Top" Width="231"/>
+
+        </StackPanel>
     </Grid>
 </Page>

@@ -14,7 +14,7 @@ namespace Bootcamp2015.AmazingRace.Helpers
 {
     public static class MobileServiceHelper
     {
-
+        private static int _skipCounter;
         private static MobileServiceClient _mobileServiceClient;
 
         public static MobileServiceClient GetInstance()
@@ -28,6 +28,7 @@ namespace Bootcamp2015.AmazingRace.Helpers
 
         private static void Init()
         {
+            _skipCounter = 0;
             _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
         }
 
@@ -62,5 +63,44 @@ namespace Bootcamp2015.AmazingRace.Helpers
             var races = await _mobileServiceClient.InvokeApiAsync<IEnumerable<Race>>("race", HttpMethod.Get, null);
             return races;
         }
+
+        private async static Task<Profile> GetProfile()
+        {
+            var profile = await _mobileServiceClient.InvokeApiAsync<Profile>("profile", HttpMethod.Get, null);
+            return profile;
+        }
+
+        private async static Task<RaceStatus> GetRaceStatus()
+        {
+            Profile profile = await GetProfile();
+            string teamId = profile.teams.First().id;
+
+            string call = string.Format("race/{0}/team/{1}", "test_race", teamId );
+            Dictionary<string, string> paramDict = new Dictionary<string, string>();
+            paramDict.Add("skip", _skipCounter.ToString());
+            var status = await _mobileServiceClient.InvokeApiAsync<RaceStatus>(call, HttpMethod.Get, paramDict);
+            return status;
+        }
+
+        private async static Task<string> GetNextClueId()
+        {
+            RaceStatus rs = await GetRaceStatus();
+            return rs.nextClueId;
+        }
+        
+        public static void IncrementSkip()
+        {
+            _skipCounter++;
+        }
+
+        public async static Task<Clue> GetNextClue()
+        {
+            string cId = await GetNextClueId();
+            Clue res = await _mobileServiceClient.InvokeApiAsync<Clue>(string.Format("clue/{0}", cId), HttpMethod.Get, null);
+            return res;
+        }
+
+
+         
     }
 }
