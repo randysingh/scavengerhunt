@@ -79,9 +79,11 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             //joind the team
             //run background task
+            //get first active race
             //move to Leaderboard
+            string raceId = @"test_race";
 
-            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
+            this.navigationService.NavigateToViewModel<LeaderboardPageViewModel>(raceId);
         }
     }
 }

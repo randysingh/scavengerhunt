@@ -8,10 +8,15 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     public class LeaderboardPageViewModel : Screen
     {
         private Race _race;
+        private IDataService dataService;
+
+        public string Parameter { get; set; }
 
         public Race Race
         {
-            get { return _race; }
+            get { 
+                return _race; 
+            }
             set 
             { 
                 _race = value;
@@ -19,9 +24,25 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public LeaderboardPageViewModel()
+        public LeaderboardPageViewModel(IDataService dataService)
         {
-            CreateTestRace();
+            this.dataService = dataService;
+        }
+
+        protected async override void OnInitialize()
+        {
+            base.OnInitialize();
+            this.Race = await this.dataService.GetRace(Parameter);
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            base.OnDeactivate(close);
         }
 
         private void CreateTestRace()
