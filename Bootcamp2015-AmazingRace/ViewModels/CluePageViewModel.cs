@@ -108,12 +108,14 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             double longitude = Double.Parse(Clue.longitude);
             double latitude = Double.Parse(Clue.latitude);
 
-            upload.PostClueResponse(
+            await upload.PostClueResponse(
                 MobileServiceHelper.GetInstance(),
                 Clue.id, 
                 latitude,
                 longitude,
                 image);
+
+            _navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
         }
 
         private async Task<byte[]> getBitmap (StorageFile f){
