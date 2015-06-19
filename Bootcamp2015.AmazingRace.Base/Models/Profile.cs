@@ -11,5 +11,8 @@ namespace Bootcamp2015.AmazingRace.Base.Models
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
+
+        [JsonProperty(PropertyName = "teams")]
+        public IEnumerable<Team> Teams { get; set; }
     }
 }

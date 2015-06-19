@@ -27,6 +27,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private string provider;
         private MobileServiceUser user;
 
+        private IMobileServiceClient _serviceClient;
+
         #region Bindable properties
 
         public ICommand GoogleLogin { get; set; }
@@ -41,16 +43,10 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             _dataService = dataService;
             _settingsService = settingsService;
 
+            _serviceClient = _dataService.MobileServiceClient();
+
             GoogleLogin = new DelegateCommand(() => DoGoogleLogin());
             FacebookLogin = new DelegateCommand(() => DoFacebookLogin());
-
-            if (_dataService.MobileServiceClient == null)
-            {
-                _dataService.MobileServiceClient = new MobileServiceClient(
-                    Connections.MobileServicesUri,
-                    Connections.MobileServicesAppKey
-                );
-            }
         }
 
         #region Identity Provider authentication
@@ -66,7 +62,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
                 if (user != null)
                 {
-                    _dataService.MobileServiceClient.CurrentUser = user;
+                    _serviceClient.CurrentUser = user;
 
                     return true;
                 }
@@ -74,7 +70,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
                 {
                     try
                     {
-                        user = await _dataService.MobileServiceClient.LoginAsync(providerType);
+                        user = await _serviceClient.LoginAsync(providerType);
 
                         _settingsService.SetSerializedValue<MobileServiceUser>(provider, user);
 
@@ -126,7 +122,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
             {
-                _dataService.MobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+                _serviceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
         }
     }

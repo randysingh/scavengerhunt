@@ -20,5 +20,11 @@ namespace Bootcamp2015.AmazingRace.Base.Models
 
         [JsonProperty(PropertyName = "points")]
         public int Points { get; set; }
+
+        [JsonProperty(PropertyName = "latitude")]
+        public double Latitude { get; set; }
+
+        [JsonProperty(PropertyName = "longitude")]
+        public double Longitude { get; set; }
     }
 }

@@ -10,15 +10,13 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
 {
     public interface IDataService
     {
-        IMobileServiceClient MobileServiceClient;
+        IMobileServiceClient MobileServiceClient();
 
         Task<IEnumerable<Race>> GetRacesAsync();
 
         Task<Race> GetRaceAsync(string raceId);
 
-        Task<Clue> GetClueAsync(string raceId, string teamId);
-
-        Task<Clue> GetClueAsync(string raceId, string teamId, int index);
+        Task<Team> GetTeamAsync(string raceId, string teamId, int index);
 
         Task<IEnumerable<Clue>> GetCluesAsync(string raceId);
 
@@ -32,6 +30,6 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
 
         Task<Profile> GetProfileAsync();
 
-        void JoinTeamAsync(string teamCode);
+        Task<Team> JoinTeamAsync(string teamCode);
     }
 }
