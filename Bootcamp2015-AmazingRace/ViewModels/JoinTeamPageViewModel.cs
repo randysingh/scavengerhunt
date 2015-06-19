@@ -31,15 +31,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private async void JoinTeamAction()
         {
-            string message;
-            try
-            {
-                var result = await _dataService.JoinTeamAsync(TeamCode);
-            }
-            catch (MobileServiceInvalidOperationException ex)
-            {
-                message = ex.Message;
-            }
+            var result = await _dataService.JoinTeamAsync(TeamCode);
 
             _navigationService.Navigate(typeof(LeaderboardPage));
         }

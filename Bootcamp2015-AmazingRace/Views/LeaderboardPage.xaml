@@ -16,10 +16,9 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Leaderboard" FontSize="30" Margin="0,0,0,30"/>
 
             <ListView Height="Auto" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center"
-                  ItemsSource="{Binding Leaderboard}" IsItemClickEnabled="False"
+                  ItemsSource="{Binding Leaderboard, Mode=TwoWay}" IsItemClickEnabled="False"
                   SelectionMode="None"
-                  ItemTemplate="{StaticResource LeaderboardTeamTemplate}">
-            </ListView>
+                  ItemTemplate="{StaticResource LeaderboardTeamTemplate}" />
 
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TeamName}" FontSize="30" Margin="0,30,0,10"/>
             <Button Content="Next clue" HorizontalAlignment="Stretch" Command="{Binding JoinTeam}"/>

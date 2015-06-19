@@ -14,6 +14,7 @@ namespace Bootcamp2015.AmazingRace.Converters
             IsTrue = Visibility.Visible;
             IsFalse = Visibility.Collapsed;
         }
+
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             return (bool)value ? IsTrue : IsFalse;
