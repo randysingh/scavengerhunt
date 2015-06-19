@@ -1,7 +1,9 @@
 ﻿using Bootcamp2015.AmazingRace.Base.Models;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Microsoft.WindowsAzure.MobileServices;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using Windows.Devices.Geolocation;
 using Windows.Security.Credentials;
 
@@ -10,28 +12,32 @@ namespace Bootcamp2015.AmazingRace.Base.Helpers
     public static class LocationHelper
     {
         private static Geolocator _locator;
-        private static IDataService _dataService;
-        private static ISettingsService _settingsService;
 
-        private static Team team = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
-        
-        public static void Start() {
-            PasswordVault vault = new PasswordVault();
-            PasswordCredential credential = vault.FindAllByResource(MobileServiceAuthenticationProvider.Google.ToString()).FirstOrDefault();
+        private static PasswordCredential credentials;
+        private static MobileServiceClient client;
 
-            if (credential != null)
+        //private static Team team = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+
+        public static void Start()
+        {
+            if (credentials == null)
             {
-                MobileServiceUser user = new MobileServiceUser(credential.UserName);
-                credential.RetrievePassword();
-                user.MobileServiceAuthenticationToken = credential.Password;
+                credentials = PasswordVaultHelper.GetPasswordCredential();
 
-                if (_locator == null)
+                if (credentials != null)
                 {
-                    _locator = new Geolocator() { ReportInterval = 1000 };
-                    //_locator.getGeopositionAsync();
-                    _locator.PositionChanged += OnLocatorPositionChanged;
+                    var user = PasswordVaultHelper.GetUser();
+                    client = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
+                    client.CurrentUser = user;
+
+                    if (_locator == null)
+                    {
+                        _locator = new Geolocator() { ReportInterval = 1000 };
+                        //_locator.getGeopositionAsync();
+                        _locator.PositionChanged += OnLocatorPositionChanged;
+                    }
                 }
-            }            
+            }
         }
 
         private static Geopoint _currentPos;
@@ -50,7 +56,12 @@ namespace Bootcamp2015.AmazingRace.Base.Helpers
             CurrentPosition = pos;
 
             // POST it
-            //_dataService.UpdateLocationAsync(team.Id, pos.Position.Latitude, pos.Position.Longitude);
+            client.InvokeApiAsync("updatelocation", HttpMethod.Post,
+                new Dictionary<string, string>() { 
+                    { "raceId", "" },
+                    { "latitude", pos.Position.Latitude.ToString() },
+                    { "longitude", pos.Position.Longitude.ToString() }
+                });
         }
     }
 }

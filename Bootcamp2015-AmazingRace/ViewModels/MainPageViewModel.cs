@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
 using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Views;
@@ -74,10 +75,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
                         user = await _serviceClient.LoginAsync(providerType);
 
                         // Store in password vault for background task
-                        PasswordVault vault = new PasswordVault();
-                        PasswordCredential credential = new PasswordCredential(
-                            providerType.ToString(), user.UserId, user.MobileServiceAuthenticationToken);
-                        vault.Add(credential);
+                        PasswordVaultHelper.provider = providerType;
+                        PasswordVaultHelper.PutInPasswordVault(user);
 
                         _settingsService.SetSerializedValue<MobileServiceUser>(provider, user);
 
