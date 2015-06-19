@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.ApplicationModel.Activation;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
-    public class CluePageViewModel : Screen, IParameterReceivable<Clue>
+    public class CluePageViewModel : Screen, IParameterReceivable<Clue>, Helpers.IFileOpenPickerContinuable
     {
         private INavigationService _navigationService;
 
@@ -24,7 +27,13 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-
+        public ICommand TakePictureCommand
+        {
+            get
+            {
+                return new DelegateCommand(o => OnTakePicture());
+            }
+        }
 
         public ICommand GotoClueCommand
         {
@@ -51,6 +60,25 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             // here is your received item
             Clue = payload; //save payload
+        }
+
+
+
+        protected void OnTakePicture()
+        {
+            var filePicker = new FileOpenPicker();
+            filePicker.FileTypeFilter.Add("*");
+            filePicker.ContinuationData["test"] = "this is me";
+
+            filePicker.PickSingleFileAndContinue();
+        }
+
+        public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        {
+            
+            Clue newClue = new Clue() { Description = args.Files.First<StorageFile>().Name };
+            Clue = newClue;
+            
         }
     }
 }

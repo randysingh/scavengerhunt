@@ -10,7 +10,7 @@
 
     <Grid>
         <TextBlock FontSize="36" HorizontalAlignment="Left" Margin="85,195,0,0" TextWrapping="Wrap" Text="{Binding Clue.Description, Mode=OneWay}" VerticalAlignment="Top"/>
-        <Button Content="Camera" HorizontalAlignment="Left" Margin="148,404,0,0" VerticalAlignment="Top"/>
+        <Button Content="Camera" Command="{Binding TakePictureCommand}" HorizontalAlignment="Left" Margin="148,404,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
