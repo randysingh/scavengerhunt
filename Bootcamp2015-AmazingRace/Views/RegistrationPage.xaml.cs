@@ -25,6 +25,12 @@ namespace Bootcamp2015.AmazingRace.Views
         public RegistrationPage()
         {
             this.InitializeComponent();
+            TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1"); TeamComboBox.Items.Add("team1");
+            RaceComboBox.Items.Add("Race1"); RaceComboBox.Items.Add("Race1");
+            RaceComboBox.Items.Add("Race1");
+            RaceComboBox.Items.Add("Race1");
+            RaceComboBox.Items.Add("Race1");
+
         }
 
         /// <summary>

@@ -86,6 +86,7 @@
     <Compile Include="Caliburn\Micro\Logging\DebugLogger.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Helpers\ContinuationManager.cs" />
+    <Compile Include="ViewModels\LeaderboardPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="Views\CluePage.xaml.cs">
       <DependentUpon>CluePage.xaml</DependentUpon>

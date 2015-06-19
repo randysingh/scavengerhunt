@@ -13,7 +13,7 @@ namespace Bootcamp2015.AmazingRace.Views
     /// </summary>
     public sealed partial class MainPage : IWebAuthenticationContinuable
     {
-        MobileServiceClient _mobileServiceClient;
+        public static MobileServiceClient _mobileServiceClient;
         public MainPage()
         {
             _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
@@ -50,11 +50,12 @@ namespace Bootcamp2015.AmazingRace.Views
                 _mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
             }
             LoginPrompt.Text = "Thank you for logging in. Please press Continue to proceed.";
+            GoogleLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
         }
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void GoToRegistration(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RegistrationPage),_mobileServiceClient);
+            Frame.Navigate(typeof(RegistrationPage));
         }
     }
 }

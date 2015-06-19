@@ -36,7 +36,7 @@ namespace Bootcamp2015.AmazingRace.Views
         {
         }
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void GoToClues(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CluePage));
         }
