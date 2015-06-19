@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Helpers;
+using Microsoft.WindowsAzure.MobileServices;
+using System;
+using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -7,12 +11,13 @@ namespace Bootcamp2015.AmazingRace.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage
+    public sealed partial class MainPage : IWebAuthenticationContinuable
     {
+        MobileServiceClient _mobileServiceClient;
         public MainPage()
         {
+            _mobileServiceClient = new MobileServiceClient(Connections.MobileServicesUri, Connections.MobileServicesAppKey);
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -21,6 +26,7 @@ namespace Bootcamp2015.AmazingRace.Views
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
+        /// 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: Prepare page for display here.
@@ -32,9 +38,23 @@ namespace Bootcamp2015.AmazingRace.Views
             // this event is handled for you.
         }
 
+        private async void GoogleLoginClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var result = await _mobileServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
+        }
+
+        public void ContinueWebAuthentication(Windows.ApplicationModel.Activation.WebAuthenticationBrokerContinuationEventArgs args)
+        {
+            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
+            {
+                _mobileServiceClient.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
+            }
+            LoginPrompt.Text = "Thank you for logging in. Please press Continue to proceed.";
+        }
+
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RegistrationPage));
+            Frame.Navigate(typeof(RegistrationPage),_mobileServiceClient);
         }
     }
 }
