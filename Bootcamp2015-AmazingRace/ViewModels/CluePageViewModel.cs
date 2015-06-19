@@ -1,4 +1,7 @@
-﻿using Bootcamp2015.AmazingRace.Common;
+﻿using Bootcamp2015.AmazingRace.Base.Helpers;
+using Bootcamp2015.AmazingRace.Base.Services;
+using Bootcamp2015.AmazingRace.Common;
+using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Models;
 using Caliburn.Micro;
 using System;
@@ -86,14 +89,38 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             filePicker.FileTypeFilter.Add("*");
             filePicker.ContinuationData["test"] = "this is me";
             filePicker.PickSingleFileAndContinue();
+
+            
         }
 
         // Called after user selects a file
-        public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
-        {           
+        public async void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
+        {
+            
             Clue newClue = new Clue() { description = args.Files.First<StorageFile>().Name };
             Clue = newClue;
+
+            UploadHelper upload = new UploadHelper();
+
+            var image = await getBitmap(args.Files.First<StorageFile>());
+            
+            double longitude = Double.Parse(Clue.longitude);
+            double latitude = Double.Parse(Clue.latitude);
+
+            upload.PostClueResponse(
+                MobileServiceHelper.GetInstance(),
+                Clue.id, 
+                latitude,
+                longitude,
+                image);
         }
+
+        private async Task<byte[]> getBitmap (StorageFile f){
+            var image = await BitmapImageHelpers.ResizeImageToByteArray(f,1000,1000,1.0);
+            return image;
+        }
+
+    
 
         #endregion
 
