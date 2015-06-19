@@ -88,6 +88,11 @@ namespace Bootcamp2015.AmazingRace.Helpers
             return rs.nextClueId;
         }
         
+        public static void IncrementSkip()
+        {
+            _skipCounter++;
+        }
+
         public async static Task<Clue> GetNextClue()
         {
             string cId = await GetNextClueId();

@@ -1,4 +1,5 @@
 ﻿using Bootcamp2015.AmazingRace.Common;
+using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.Models;
 using Caliburn.Micro;
 using System;
@@ -43,7 +44,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public ICommand GotoClueCommand
+        public ICommand GotoNextClueCommand
         {
             get
             {
@@ -97,15 +98,17 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         #endregion
 
-        protected void OnGotoCluePage()
+        protected async void OnGotoCluePage()
         {
-            _navigationService.NavigateToViewModel<CluePageViewModel>();
+            MobileServiceHelper.IncrementSkip();
+            Clue c = await MobileServiceHelper.GetNextClue();
+            _navigationService.NavigateToViewModel<CluePageViewModel>(c);
         }
 
         protected void OnGotoMapPage()
         {
-            Clue fakeClue = new Clue { longitude = "47.2", latitude = "47.2" };
-            _navigationService.NavigateToViewModel<MapPageViewModel>(fakeClue);
+           
+            _navigationService.NavigateToViewModel<MapPageViewModel>(Clue);
         }
 
         #endregion
