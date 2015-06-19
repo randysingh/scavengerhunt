@@ -18,10 +18,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <maps:MapControl 
-            x:Name="_map"
+        <maps:MapControl
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
             MapServiceToken="{Binding MapToken}"
+            Center="{Binding CurrentPosition}"
             ZoomLevel="10">
         </maps:MapControl>
 

@@ -17,10 +17,15 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly ISettingsService _settingsService;
 
         private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
 
+        private Team _currentTeam;
+
         public ICommand JoinTeam { get; set; }
+
+        public string TeamName { get { return _currentTeam.Name; } }
 
         public List<Team> Leaderboard
         {
@@ -30,14 +35,20 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             }
         }
 
-        public LeaderboardPageViewModel(INavigationService navigationService, IDataService dataService)
+        public LeaderboardPageViewModel(INavigationService navigationService,
+            IDataService dataService, ISettingsService settingsService)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _settingsService = settingsService;
 
             JoinTeam = new DelegateCommand(() => GoToNextClue());
 
-            //_teams = _dataService.GetRaceAsync()
+            // Get current team
+            _currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
+
+            // Get race info (leaderboards)
+            //Race race = _dataService.GetRaceAsync(currentTeam.);
         }
 
         private void GoToNextClue()

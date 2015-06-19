@@ -18,5 +18,17 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         }
 
         public string MapToken { get { return ApplicationConstants.MapToken; } }
+
+        public Geopoint CurrentPosition
+        {
+            get
+            {
+                return new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = 47.604,
+                    Longitude = -122.329
+                });
+            }
+        }
     }
 }
