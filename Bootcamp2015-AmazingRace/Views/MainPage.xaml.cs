@@ -54,7 +54,7 @@ namespace Bootcamp2015.AmazingRace.Views
 
         private void GoToRegistration(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RegistrationPage));
+            //Frame.Navigate(typeof(RegistrationPage));
         }
     }
 }

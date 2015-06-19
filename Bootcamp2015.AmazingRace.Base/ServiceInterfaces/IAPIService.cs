@@ -11,5 +11,6 @@ namespace Bootcamp2015.AmazingRace.Base.ServiceInterfaces
     {
         Task SignupForTeam(string TeamID);
         Task<LeaderboardValues> getLeaderBoards();
+        Task<Clue> getClue();
     }
 }
