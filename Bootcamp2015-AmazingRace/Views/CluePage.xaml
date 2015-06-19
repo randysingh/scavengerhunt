@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="Bootcamp2015.AmazingRace.Views.CluePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bootcamp2015.AmazingRace.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel>
+            <Button Content="Camera" Command="{Binding TakePictureCommand}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Content="Skip" Command="{Binding GotoNextClueCommand}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Content="Map&#xD;&#xA;" Command="{Binding GotoMapCommand}" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+            <TextBlock FontSize="36" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Clue.description, Mode=OneWay}" VerticalAlignment="Top"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
