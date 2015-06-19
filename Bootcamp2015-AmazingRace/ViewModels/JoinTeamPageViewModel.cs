@@ -49,7 +49,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             string message;
             try
             {
-                var result = await _dataService.JoinTeamAsync(TeamCode);
+                Team result = await _dataService.JoinTeamAsync(TeamCode);
+                _settingsService.SetSerializedValue<Team>("team", result);
             }
             catch (MobileServiceInvalidOperationException ex)
             {
