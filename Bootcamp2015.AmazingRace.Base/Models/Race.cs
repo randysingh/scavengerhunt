@@ -14,5 +14,14 @@ namespace Bootcamp2015.AmazingRace.Base.Models
 
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        [JsonProperty(PropertyName = "startDate")]
+        public DateTime StartDate { get; set; }
+
+        [JsonProperty(PropertyName = "endDate")]
+        public DateTime EndDate { get; set; }
+
+        [JsonProperty(PropertyName = "teams")]
+        public IEnumerable<Team> Teams { get; set; }
     }
 }

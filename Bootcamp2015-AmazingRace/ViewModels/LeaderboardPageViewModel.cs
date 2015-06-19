@@ -36,6 +36,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             _dataService = dataService;
 
             JoinTeam = new DelegateCommand(() => GoToNextClue());
+
+            //_teams = _dataService.GetRaceAsync()
         }
 
         private void GoToNextClue()
