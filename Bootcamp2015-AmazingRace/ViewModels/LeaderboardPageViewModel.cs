@@ -19,24 +19,26 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private readonly IDataService _dataService;
         private readonly ISettingsService _settingsService;
 
-        private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
+        public ObservableCollection<Team> Leaderboard { get; set; }
 
-        private Team _currentTeam;
+        // For Caliburn's passing in object
+        public Team CurrentTeam { get; set; }
+        public Team Parameter
+        {
+            set
+            {
+                CurrentTeam = value;
+            }
+        }
 
         public ICommand JoinTeam { get; set; }
 
-        public string TeamName { 
-            get {
-                return "TEAM NAME";
-                //return _currentTeam.Name; 
-            } 
-        }
-
-        public List<Team> Leaderboard
+        public string TeamName
         {
             get
             {
-                return _teams.OrderBy(e => e.Points).ToList();
+                return "TEAM NAME";
+                //return _currentTeam.Name; 
             }
         }
 
@@ -53,11 +55,19 @@ namespace Bootcamp2015.AmazingRace.ViewModels
             //_currentTeam = _settingsService.GetDeserializedValueOrDefault<Team>("TEAM");
 
             // Get race info (leaderboards)
-            //Race race = _dataService.GetRaceAsync(currentTeam.);
+            Task.Run(() => GetLeaderboards()).Wait();
+        }
+
+        private async void GetLeaderboards()
+        {
+            Race race = await _dataService.GetRaceAsync("test_race");
+            Leaderboard = new ObservableCollection<Team>(race.Teams.OrderBy(x => x.Rank));
         }
 
         private void GoToNextClue()
         {
+            // TODO: hide button if no clues
+
             _navigationService.Navigate(typeof(CluePage));
         }
     }

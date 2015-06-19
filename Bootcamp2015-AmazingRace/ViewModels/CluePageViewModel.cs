@@ -18,15 +18,18 @@ namespace Bootcamp2015.AmazingRace.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly ISettingsService _settingsService;
 
         public ICommand ViewMap { get; set; }
         public ICommand UploadPhoto { get; set; }
         public ICommand Skip { get; set; }
 
-        public CluePageViewModel(INavigationService navigationService, IDataService dataService)
+        public CluePageViewModel(INavigationService navigationService,
+            IDataService dataService, ISettingsService settingsService)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _settingsService = settingsService;
 
             ViewMap = new DelegateCommand(() => ShowMap());
             UploadPhoto = new DelegateCommand(() => OnFilePick());
@@ -45,6 +48,12 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         public void ContinueFileOpenPicker(FileOpenPickerContinuationEventArgs args)
         {
             //args.Files.Cound
+
+            // POST photo
+            //_dataService.SubmitClueResponseAsync();
+
+            // Go back to leaderboards
+            _navigationService.NavigateToViewModel<LeaderboardPageViewModel>();
         }
 
         private void ShowMap()
@@ -54,7 +63,7 @@ namespace Bootcamp2015.AmazingRace.ViewModels
 
         private void GetNextClue()
         {
-
+            // Change content
         }
     }
 }
