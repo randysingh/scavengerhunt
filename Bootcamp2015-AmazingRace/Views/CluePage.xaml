@@ -17,9 +17,9 @@
 
             <TextBlock Name="body" Style="{StaticResource MessageDialogContentStyle}" TextWrapping="Wrap" Text="{Binding ClueText}" />
 
-            <Button Content="View map" Command="{Binding ViewMap}"/>
-            <Button Content="Upload photo" Command="{Binding UploadPhoto}"/>
-            <Button Content="Skip" Command="{Binding Skip}"/>
+            <Button FontFamily="Segoe UI Symbol" Content="View map &#xE139;" Command="{Binding ViewMap}"/>
+            <Button FontFamily="Segoe UI Symbol" Content="Upload photo &#xE114;" Command="{Binding UploadPhoto}"/>
+            <Button FontFamily="Segoe UI Symbol" Content="Skip &#xE2A9;" Command="{Binding Skip}"/>
         </StackPanel>
     </Grid>
 </Page>
