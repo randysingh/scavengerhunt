@@ -8,7 +8,11 @@ namespace Bootcamp2015.AmazingRace.Base.APIModels
 {
     public class RaceValues
     {
-        public string id;
-        public string name;
+        public IEnumerable<Race> races;
+        public class Race
+        {
+            public string id;
+            public string name;
+        }
     }
 }

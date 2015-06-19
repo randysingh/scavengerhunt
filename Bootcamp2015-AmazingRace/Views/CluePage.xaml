@@ -7,19 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="White">
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Button Foreground="Black" FontSize="18" Content="Logout" Click="LogoutClick" Margin="291,-10,0,592" Height="52"/>
+
         <TextBlock Foreground="Black" Text="Clues" FontSize="36" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <StackPanel>
-            <Button Foreground="Black" FontSize="18" Content="Logout" Click="LogoutClick" Height="52"/>
-            <Button Background="Green" Foreground="Black" FontSize="18" Content="View" Click="ViewClick" HorizontalAlignment="Center" Height="52"/>
-            <Button Background="Green" Foreground="Black" FontSize="18" Content="Upload Photo" Click="PhotoClick" HorizontalAlignment="Center" Height="52"/>
-            <Button Background="Green" Foreground="Black" FontSize="18" Content="Skip" Click="SkipClick" HorizontalAlignment="Center" Height="52"/>
-        </StackPanel>
+        <Grid>
+            <Button Background="Green" Foreground="White" FontSize="18" Content="View" Click="ViewClick" HorizontalAlignment="Center" Width="65" Margin="149,376,142,207"/>
+            <Button Background="Green" Foreground="White" FontSize="18" Content="Skip" Click="SkipClick" HorizontalAlignment="Center" Width="65" Margin="281,582,10,1"/>
+            <Button Background="Green" Foreground="White" FontSize="18" Content="Upload" Click="PhotoClick" HorizontalAlignment="Center" Width="65" Margin="149,419,142,164"/>
+            <TextBlock Foreground="Black" Name="ClueDescription" HorizontalAlignment="Left" Margin="34,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="282" Width="324"/>
+        </Grid>
     </Grid>
 </Page>

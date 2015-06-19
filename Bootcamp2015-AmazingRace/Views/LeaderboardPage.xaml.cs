@@ -32,8 +32,9 @@ namespace Bootcamp2015.AmazingRace.Views
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            await App.Api.getLeaderBoards();
         }
 
         private void GoToClues(object sender, Windows.UI.Xaml.RoutedEventArgs e)

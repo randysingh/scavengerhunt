@@ -10,8 +10,8 @@ namespace Bootcamp2015.AmazingRace.Base.APIModels
     {
         public string id;
         public string description;
-        public int points;
-        public double latitude;
-        public double longitude;
+        public string points;
+        public string latitude;
+        public string longitude;
     }
 }

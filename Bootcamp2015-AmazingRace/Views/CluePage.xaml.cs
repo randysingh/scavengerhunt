@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bootcamp2015.AmazingRace.Base.APIModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,8 +33,10 @@ namespace Bootcamp2015.AmazingRace.Views
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            Clue currentClue = await App.Api.getClue();
+            ClueDescription.Text = currentClue.description;
         }
 
         private void LogoutClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -41,9 +44,10 @@ namespace Bootcamp2015.AmazingRace.Views
             Frame.Navigate(typeof(MainPage));
         }
 
-        private void ViewClick(object sender, RoutedEventArgs e)
+        private async void ViewClick(object sender, RoutedEventArgs e)
         {
             // make api call to get clue
+            
             Frame.Navigate(typeof(MapPage));
         }
 

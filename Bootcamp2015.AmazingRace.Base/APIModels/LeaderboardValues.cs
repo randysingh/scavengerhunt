@@ -17,10 +17,10 @@ namespace Bootcamp2015.AmazingRace.Base.APIModels
             public string id;
             public string name;
             public string imageUri;
-            public int rank;
-            public int points;
-            public double latitute;
-            public double longitude;
+            public string rank;
+            public string points;
+            public string latitute;
+            public string longitude;
         }
     }
 }

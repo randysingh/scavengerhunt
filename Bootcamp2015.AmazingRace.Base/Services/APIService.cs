@@ -34,18 +34,19 @@ namespace Bootcamp2015.AmazingRace.Base.Services
 
         public async Task<LeaderboardValues> getLeaderBoards()
         {
-            RaceValues raceValues = await _mobileServiceClient.InvokeApiAsync<RaceValues>("Race", HttpMethod.Get, new Dictionary<string, string>());
-            raceId = raceValues.id;
+            var raceValues = await _mobileServiceClient.InvokeApiAsync<IEnumerable<Bootcamp2015.AmazingRace.Base.APIModels.RaceValues.Race>>("Race", HttpMethod.Get, null);
 
-            LeaderboardValues leaderboardValues = await _mobileServiceClient.InvokeApiAsync<LeaderboardValues>("Race/" + raceId, HttpMethod.Get, new Dictionary<string, string>());
+            raceId = raceValues.ElementAt(0).id;
+
+            LeaderboardValues leaderboardValues = await _mobileServiceClient.InvokeApiAsync<LeaderboardValues>("Race/" + raceId, HttpMethod.Get, null);
             return leaderboardValues;
         }
 
         public async Task<Clue> getClue()
         {
-            ClueInfo clueInfo = await _mobileServiceClient.InvokeApiAsync<ClueInfo>(String.Format("Race/{0}/team/{1}", raceId, teamid), HttpMethod.Get, new Dictionary<string, string>());
+            ClueInfo clueInfo = await _mobileServiceClient.InvokeApiAsync<ClueInfo>(String.Format("Race/{0}/team/{1}", raceId, teamid), HttpMethod.Get, null);
             string next_clue = clueInfo.nextClueId;
-            Clue clue = await _mobileServiceClient.InvokeApiAsync<Clue>(String.Format("Clue/{0}", next_clue), HttpMethod.Get, new Dictionary<string, string>());
+            Clue clue = await _mobileServiceClient.InvokeApiAsync<Clue>(String.Format("Clue/{0}", next_clue), HttpMethod.Get, null);
             return clue;
         }
     }
