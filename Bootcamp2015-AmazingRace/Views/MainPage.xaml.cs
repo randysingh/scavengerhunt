@@ -16,8 +16,6 @@ namespace Bootcamp2015.AmazingRace.Views
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
-
-  
         }
 
     }
