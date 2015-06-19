@@ -4,11 +4,11 @@
     xmlns:views="using:Bootcamp2015.AmazingRace.Views">
 
     <DataTemplate x:Key="LeaderboardTeamTemplate">
-        <StackPanel>
-            <TextBlock>
-                <Run Text="{Binding Team.Name}" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="18">
+                <Run Text="{Binding Name}" />
                 <Run>(</Run>
-                <Run Text="{Binding Team.Points}" />
+                <Run Text="{Binding Points}" />
                 <Run> points)</Run>
             </TextBlock>
         </StackPanel>
