@@ -45,13 +45,12 @@ namespace Bootcamp2015.AmazingRace
             container.RegisterWinRTServices();
             container.RegisterSharingService();
 
-            container
-                .PerRequest<MainPageViewModel>()
-            ;
+            container.PerRequest<MainPageViewModel>();
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
             container.RegisterInstance(typeof(ISettingsService), null, settings);
+            container.RegisterSingleton(typeof(IDataService), null, typeof(DataService));
 
         }
 
