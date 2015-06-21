@@ -1,18 +1,11 @@
-﻿using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
-using Caliburn.Micro;
-using Microsoft.WindowsAzure.MobileServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
-using Windows.Security.Credentials;
 using Bootcamp2015.AmazingRace.Base;
 using Bootcamp2015.AmazingRace.Base.Helpers;
+using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Helpers;
+using Caliburn.Micro;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace Bootcamp2015.AmazingRace.ViewModels
 {
@@ -40,12 +33,8 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         {
             this.mobileService.Initialize();
 
-            //var passwordCredentials = PasswordVaultHelper.RetriveGooglePasswordCredential();
-            //if (passwordCredentials == null)
-            //{
-                var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
-                PasswordVaultHelper.PutGooglePasswordToPasswordVault(result);
-            //}
+            var result = await this.mobileService.ServiceClient.LoginAsync(MobileServiceAuthenticationProvider.Google);
+            PasswordVaultHelper.PutGooglePasswordToPasswordVault(result);
 
             this.navigationService.NavigateToViewModel<JoinTheTeamPageViewModel>();
         }
