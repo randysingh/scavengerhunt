@@ -17,7 +17,6 @@ namespace Bootcamp2015.AmazingRace.ViewModels
         private readonly INavigationService navigationService;
 
         private Profile currentUser;
-        private ICommand joinCommand;
         private string teamCode;
 
         public Profile CurrentUser

@@ -60,7 +60,7 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock Text="Next Clue" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="22" />
-            <Button Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="2" />
+            <Button Command="{Binding NextClueCommand}" Content=">" MinHeight="50" MinWidth="50" Width="50" Height="50" Grid.Column="2" />
         </Grid>
         
     </Grid>
