@@ -1,17 +1,17 @@
-﻿using Windows.UI.Xaml.Navigation;
+﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 
 namespace Bootcamp2015.AmazingRace.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// The main login page
     /// </summary>
-    public sealed partial class MainPage
+    public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -22,8 +22,6 @@ namespace Bootcamp2015.AmazingRace.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // TODO: Prepare page for display here.
-
             // TODO: If your application contains multiple pages, ensure that you are
             // handling the hardware Back button by registering for the
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.

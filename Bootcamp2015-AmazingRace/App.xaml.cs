@@ -1,30 +1,21 @@
-﻿using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
+﻿using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.ServiceInterfaces;
 using Bootcamp2015.AmazingRace.Base.Services;
 using Bootcamp2015.AmazingRace.Helpers;
 using Bootcamp2015.AmazingRace.ViewModels;
 using Bootcamp2015.AmazingRace.Views;
 using Caliburn.Micro;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 namespace Bootcamp2015.AmazingRace
 {
-    public sealed partial class App 
+    public sealed partial class App
     {
         private WinRTContainer container;
         private SettingsService settings;
@@ -41,18 +32,20 @@ namespace Bootcamp2015.AmazingRace
 
         protected override void Configure()
         {
+            ViewModelLocator.AddNamespaceMapping("Bootcamp2015.AmazingRace.Views", "Bootcamp2015.AmazingRace.ViewModels");
+            ViewLocator.AddNamespaceMapping("Bootcamp2015.AmazingRace.ViewModels", "Bootcamp2015.AmazingRace.Views");
+
             container = new WinRTContainer();
             container.RegisterWinRTServices();
             container.RegisterSharingService();
 
-            container
-                .PerRequest<MainPageViewModel>()
-            ;
+            container.PerRequest<CluePageViewModel>();
+            container.PerRequest<JoinTeamPageViewModel>();
+            container.PerRequest<LeaderboardPageViewModel>();
+            container.PerRequest<MainPageViewModel>();
+            container.PerRequest<MapPageViewModel>();
 
-            container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
-            container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
-            container.RegisterInstance(typeof(ISettingsService), null, settings);
-
+            PrepareViewFirst();
         }
 
         protected override object GetInstance(Type service, string key)
@@ -78,21 +71,26 @@ namespace Bootcamp2015.AmazingRace
 
         #region Navigation Service
 
+        protected override void PrepareViewFirst(Frame rootFrame)
+        {
+            container.RegisterNavigationService(rootFrame);
+
+            container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
+            container.RegisterSingleton(typeof(IDataService), null, typeof(DataService));
+            container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
+            container.RegisterInstance(typeof(ISettingsService), null, settings);
+        }
+
         public INavigationService NavigationService
         {
             get { return (INavigationService)container.GetInstance(typeof(INavigationService), null); }
         }
 
-        protected override void PrepareViewFirst(Frame rootFrame)
-        {
-            container.RegisterNavigationService(rootFrame);
-        }
-
         #endregion
 
         #endregion
 
-        #region Application Lifecylcle
+        #region Application Lifecycle
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)
         {
@@ -120,6 +118,7 @@ namespace Bootcamp2015.AmazingRace
         {
             base.OnResuming(sender, e);
         }
+
         protected override void OnSuspending(object sender, SuspendingEventArgs e)
         {
             base.OnSuspending(sender, e);

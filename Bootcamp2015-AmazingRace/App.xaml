@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cal="using:Caliburn.Micro"
     xmlns:converters="using:Bootcamp2015.AmazingRace.Converters"
+    xmlns:cm="using:Caliburn.Micro"
     xmlns:local="using:Bootcamp2015.AmazingRace">
 
     <cal:CaliburnApplication.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///ApplicationStyles.xaml"/>
+                <ResourceDictionary Source="Resources/DataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
             <converters:BooleanToVisibilityConverter x:Key="bool2vis"/>
