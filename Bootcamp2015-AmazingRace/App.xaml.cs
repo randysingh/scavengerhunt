@@ -21,6 +21,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Bootcamp2015.AmazingRace.Base;
+using Bootcamp2015.AmazingRace.Base.Helpers;
 
 namespace Bootcamp2015.AmazingRace
 {
@@ -28,11 +30,15 @@ namespace Bootcamp2015.AmazingRace
     {
         private WinRTContainer container;
         private SettingsService settings;
+        private DataService dataService;
+        private MobileService mobileService;
 
         public App()
         {
             this.InitializeComponent();
             settings = new SettingsService();
+            mobileService = new MobileService();
+            dataService = new DataService(mobileService);
         }
 
         #region Bootstrapper
@@ -44,14 +50,21 @@ namespace Bootcamp2015.AmazingRace
             container = new WinRTContainer();
             container.RegisterWinRTServices();
             container.RegisterSharingService();
-
-            container
-                .PerRequest<MainPageViewModel>()
-            ;
+            
+            container.PerRequest<MainPageViewModel>();
+            container.PerRequest<JoinTheTeamPageViewModel>();
+            container.PerRequest<LeaderboardPageViewModel>();
+            container.PerRequest<CluePageViewModel>();
+            container.PerRequest<MapPageViewModel>();
 
             container.RegisterSingleton(typeof(IEventAggregator), "ea", typeof(EventAggregator));
             container.RegisterSingleton(typeof(IMessageDialogService), null, typeof(MessageDialogService));
-            container.RegisterInstance(typeof(ISettingsService), null, settings);
+            container.RegisterInstance(typeof(IMobileService), null, this.mobileService);
+            container.RegisterInstance(typeof(ISettingsService), null, this.settings);
+            container.RegisterInstance(typeof(IDataService), null, this.dataService);
+
+            FakeIoC.GetInstance().DataService = this.dataService;
+            FakeIoC.GetInstance().SettingsService = this.settings;
 
         }
 
@@ -123,7 +136,9 @@ namespace Bootcamp2015.AmazingRace
         protected override void OnSuspending(object sender, SuspendingEventArgs e)
         {
             base.OnSuspending(sender, e);
+            BackgroundTaskHelpers.BackgroundTaskRemove();
         }
+
 
         #endregion
     }
